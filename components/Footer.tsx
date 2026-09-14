@@ -49,11 +49,11 @@ export default function Footer() {
           </nav>
 
           <a
-            href="#"
+            href="https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw=="
             className="flex items-center gap-2 text-sm text-smoke transition-colors hover:text-gold"
           >
             <Instagram size={16} />
-            {restaurantInfo.instagram}
+            
           </a>
         </div>
 

@@ -12,10 +12,10 @@ const POINTS = [
 ];
 
 const EXPERIENCE_SLIDES = [
-  { src: "/images/ambience/lounge-wide.jpg", label: "The main room" },
-  { src: "/images/ambience/bar-wide.jpg", label: "The bar after dark" },
-  { src: "/images/ambience/arches.jpg", label: "Arches and warm light" },
-  { src: "/images/ambience/greenery-hall.jpg", label: "A table in the greenery" },
+  { src: "/images/events/raghu-dixit-crowd.jpg", label: "The Concert" },
+  { src: "/images/cuisine/signature-bites.jpg", label: "Signature Bites" },
+  { src: "/images/menu/1.jpg", label: "Cocktails" },
+  { src: "/images/ambience/florals.jpg", label: "A table in the greenery" },
 ];
 
 export default function Experience() {

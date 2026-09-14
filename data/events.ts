@@ -17,15 +17,61 @@ export const events: SkydeckEvent[] = [
     time: "8:00 PM",
     description: "An evening of live music with the Raghu Dixit Project.",
     image: "/images/events/raghu-dixit-project.jpg",
+
   },
-  // Add the next confirmed event here, e.g.:
-  // {
-  //   id: "your-event-slug",
-  //   title: "Live at Skydeck",
-  //   artist: "Artist / Act Name",
-  //   date: "2026-12-01",
-  //   time: "8:00 PM",
-  //   description: "One line on the night.",
-  //   image: "/images/events/your-event.jpg",
-  // },
+    {
+    id: "raghu-dixit-project 2",
+    title: "Live at Skydeck",
+    artist: "The D Major Band",
+    date: "2026-03-14",
+    time: "8:00 PM",
+    description: "d major",
+    image: "/images/events/d major.jpg",
+    
+  },
+ 
+    {
+    id: "raghu-dixit-project 3",
+    title: "Live at Skydeck",
+    artist: "The H20 Band",
+    date: "2026-03-14",
+    time: "8:00 PM",
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/h20 band.jpg",
+    
+  },
+ 
+    {
+    id: "raghu-dixit-project 4",
+    title: "Live at Skydeck",
+    artist: "The Hat Dropper",
+    date: "2026-03-14",
+    time: "8:00 PM",
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/hat dropper.jpg",
+    
+  },
+ 
+    {
+    id: "raghu-dixit-project 5",
+    title: "Live at Skydeck",
+    artist: "Swarag - The Band",
+    date: "2026-03-14",
+    time: "8:00 PM",
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/swarg.jpg",
+    
+  },
+ 
+    {
+    id: "raghu-dixit-project 6",
+    title: "Live at Skydeck",
+    artist: "Hemanth Rakhi event",
+    date: "2026-03-14",
+    time: "8:00 PM",
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/hemanth rakhi.jpg",
+    
+  },
+ 
 ];

@@ -11,9 +11,9 @@ export const restaurantInfo: RestaurantInfo = {
   tagline: "Resto Pub & Kitchen",
   location: "RR Nagar, Bengaluru",
   address: "Add address — RR Nagar, Bengaluru",
-  phone: "Add phone number",
-  email: "Add email address",
-  instagram: "Add Instagram handle",
+  phone: "9845556080",
+  email: "skydec@gmail.com",
+  instagram: "@skydeck__rrnagar",
   mapsUrl: "Add Google Maps link",
   openingHours: [
     { days: "Add days", hours: "Add hours" },

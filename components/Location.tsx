@@ -1,16 +1,43 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { MapPin, Phone, Clock, Instagram } from "lucide-react";
 import { restaurantInfo } from "@/data/restaurant";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 export default function Location() {
   const r = restaurantInfo;
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+  const imageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.18]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [-24, 24]);
 
   return (
-    <section id="location" className="relative bg-char py-24 lg:py-32">
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
+    <section
+      id="location"
+      ref={sectionRef}
+      className="section-glow relative isolate overflow-hidden bg-char py-24 lg:py-32"
+    >
+      <motion.div
+        style={{ scale: imageScale, y: imageY }}
+        className="pointer-events-none absolute inset-y-0 right-0 hidden w-[58%] lg:block"
+      >
+        <AtmosphericFrame
+          src="/images/ambience/bar-glow.jpg"
+          alt="Skydeck dining hall from the entrance"
+          tone="blue"
+          className="h-full w-full"
+          sizes="58vw"
+        />
+      </motion.div>
+      <div className="pointer-events-none absolute inset-0 hidden bg-gradient-to-r from-char via-char/90 to-char/10 lg:block" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-char/20 via-transparent to-char lg:hidden" />
+
+      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-1 px-6 lg:grid-cols-2 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -77,10 +104,10 @@ export default function Location() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative aspect-[4/5] w-full overflow-hidden rounded-sm lg:aspect-auto"
+          className="relative mt-14 aspect-[4/5] w-full overflow-hidden rounded-sm border border-bone/10 lg:absolute lg:inset-y-20 lg:right-10 lg:mt-0 lg:hidden"
         >
           <AtmosphericFrame
-            src="/images/ambience/hall-rows.jpg"
+            src="/images/ambience/bar-glow.jpg"
             alt="Skydeck dining hall from the entrance"
             tone="blue"
             className="h-full w-full"

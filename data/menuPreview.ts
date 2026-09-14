@@ -38,12 +38,14 @@ export const menuPreview: MenuItem[] = [
     id: "dish-005",
     name: "Add dish name",
     description: "Add a short description.",
+    image: "/images/menu/6.png",
     price: "₹---",
   },
   {
     id: "dish-006",
     name: "Add dish name",
     description: "Add a short description.",
+    image: "/images/menu/7.png",
     price: "₹---",
   },
 ];

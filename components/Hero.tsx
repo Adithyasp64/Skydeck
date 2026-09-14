@@ -61,7 +61,7 @@ export default function Hero() {
             transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
             className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
           >
-            Elevate your evening.
+            MAKE TONIGHT A STORY.
           </motion.h1>
 
           <motion.p
@@ -70,7 +70,7 @@ export default function Hero() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
             className="mt-5 max-w-md text-lg text-smoke"
           >
-            Great food. Good music. Better nights.
+           Good Food . Live Energy . Unforgettable Nights . 
           </motion.p>
 
           <motion.div

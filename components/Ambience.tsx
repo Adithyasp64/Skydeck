@@ -8,38 +8,37 @@ const TILES = [
     src: "/images/ambience/bar-glow.jpg",
     caption: "The lights",
     tone: "gold" as const,
-    // large hero tile
-    span: "col-span-2 row-span-2 aspect-[4/5] sm:aspect-[16/13]",
+    span: "col-span-2 row-span-2 aspect-[4/5] sm:aspect-[16/13] lg:col-span-6 lg:row-span-2 lg:row-start-1 lg:aspect-auto",
   },
   {
     src: "/images/ambience/florals.jpg",
     caption: "The green",
     tone: "ember" as const,
-    span: "col-span-1 row-span-1 aspect-[3/4]",
+    span: "col-span-1 row-span-1 aspect-[3/4] lg:col-start-7 lg:col-span-3 lg:row-start-1 lg:aspect-auto",
   },
   {
     src: "/images/ambience/bar-chevron.jpg",
     caption: "The bar",
     tone: "blue" as const,
-    span: "col-span-1 row-span-2 aspect-[3/5] sm:aspect-auto",
+    span: "col-span-1 row-span-1 aspect-[3/4] lg:col-start-10 lg:col-span-3 lg:row-start-1 lg:aspect-auto",
   },
   {
     src: "/images/ambience/arches.jpg",
     caption: "The vibe",
     tone: "gold" as const,
-    span: "col-span-1 row-span-1 aspect-[3/4]",
+    span: "col-span-1 row-span-1 aspect-[3/4] lg:col-start-7 lg:col-span-3 lg:row-start-2 lg:aspect-auto",
   },
   {
     src: "/images/ambience/mural-monkey.jpg",
     caption: "The details",
     tone: "violet" as const,
-    span: "col-span-1 row-span-1 aspect-[3/4]",
+    span: "col-span-1 row-span-1 aspect-[3/4] lg:col-start-10 lg:col-span-3 lg:row-start-2 lg:aspect-auto",
   },
 ];
 
 export default function Ambience() {
   return (
-    <section id="ambience" className="relative bg-void py-24 lg:py-32">
+    <section id="ambience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -57,7 +56,7 @@ export default function Ambience() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:auto-rows-[190px] lg:grid-cols-12 lg:gap-5">
           {TILES.map((tile, i) => (
             <motion.div
               key={tile.caption}

@@ -26,20 +26,20 @@ export const cuisines: Cuisine[] = [
   },
   {
     id: "chinese",
-    name: "Chinese",
-    description: "Wok-fired, bold and quick.",
-    // No photo supplied yet — add /images/cuisine/chinese.jpg to activate.
+    name: "Sushi",
+    description: "Straight From Japan.",
+    image: "/images/menu/5.png",
   },
   {
     id: "continental",
     name: "Continental",
-    description: "Comfort plates, done properly.",
-    // No photo supplied yet — add /images/cuisine/continental.jpg to activate.
+    description: "Premium plates, done properly.",
+    image: "/images/menu/4.jpg",
   },
   {
     id: "desserts",
     name: "Desserts",
     description: "A sweet way to end the night.",
-    // No photo supplied yet — add /images/cuisine/desserts.jpg to activate.
+    image: "/images/menu/2.png",
   },
 ];
