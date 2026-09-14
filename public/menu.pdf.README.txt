@@ -1,0 +1,5 @@
+Replace this folder's placeholder by adding your real menu as:
+  public/menu.pdf
+
+"View Full Menu" (in the Menu Preview section) already links to /menu.pdf —
+no code changes needed once the file is added.
