@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Loader2, CheckCircle2, AlertCircle, Minus, Plus } from "lucide-react";
 import { createReservation } from "@/services/reservationService";
 import { ReservationInput, ReservationRecord } from "@/types/reservation";
+import { restaurantInfo } from "@/data/restaurant";
 
 type FormState = ReservationInput;
 type Status = "idle" | "loading" | "success" | "error";
@@ -27,6 +28,24 @@ const TIMES = [
 function todayISO() {
   const d = new Date();
   return d.toISOString().split("T")[0];
+}
+
+function openWhatsApp(reservation: ReservationRecord) {
+  const digits = restaurantInfo.phone.replace(/\D/g, "");
+  const recipient = digits.length === 10 ? `91${digits}` : digits;
+  const message = [
+    "New Skydeck reservation request",
+    `Name: ${reservation.name}`,
+    `Phone: ${reservation.phone}`,
+    `Email: ${reservation.email}`,
+    `Guests: ${reservation.guests}`,
+    `Date: ${reservation.date}`,
+    `Time: ${reservation.time}`,
+    `Special requests: ${reservation.requests || "None"}`,
+    `Reference: ${reservation.id}`,
+  ].join("\n");
+
+  window.location.assign(`https://wa.me/${recipient}?text=${encodeURIComponent(message)}`);
 }
 
 export default function ReservationSection() {
@@ -69,6 +88,7 @@ export default function ReservationSection() {
     if (result.success && result.reservation) {
       setConfirmed(result.reservation);
       setStatus("success");
+      openWhatsApp(result.reservation);
     } else {
       setServerError(result.error ?? "Something went wrong. Please try again.");
       setStatus("error");
@@ -134,7 +154,7 @@ export default function ReservationSection() {
                   </div>
                 </div>
                 <p className="mt-6 max-w-sm text-sm text-smoke">
-                  We&apos;ll contact you shortly to confirm your reservation.
+                  WhatsApp is opening with your reservation details ready to send.
                 </p>
                 <button
                   onClick={reset}

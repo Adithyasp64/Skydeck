@@ -90,6 +90,14 @@ with your real integration, returning the same `ReservationRecord` shape.
 **Nothing in the UI needs to change** — the form only ever talks to
 `reservationService.ts`, and that contract stays the same.
 
+### WhatsApp reservation handoff
+
+After the reservation is saved, the form opens a normal `wa.me` link addressed
+to the pub number in `data/restaurant.ts`, with the customer's reservation
+details prefilled. The customer must press **Send** in WhatsApp; browsers do not
+allow websites to silently send messages. No WhatsApp Business API or secrets
+are needed for this flow.
+
 ## Custom cursor
 
 `components/CustomCursor.tsx` only activates on devices with a fine pointer
