@@ -15,8 +15,8 @@ export const events: SkydeckEvent[] = [
     artist: "Raghu Dixit Project",
     date: "2026-03-14",
     time: "8:00 PM",
-    description: "An evening of live music with the Raghu Dixit Project.",
-    image: "/images/events/raghu-dixit-project.jpg",
+    description: "An evening of live music with the Raghu Dixit Concert.",
+    image: "/images/events/raghu-dixit-crowd.jpg",
 
   },
     {

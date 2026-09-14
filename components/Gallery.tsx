@@ -5,9 +5,9 @@ import { galleryImages } from "@/data/gallery";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const SIZE_CLASSES: Record<string, string> = {
-  sm: "col-span-1 row-span-1 aspect-square sm:col-span-1 lg:col-span-3 lg:row-span-1 lg:aspect-auto",
-  md: "col-span-1 row-span-2 aspect-[3/4] sm:col-span-1 lg:col-span-3 lg:row-span-2 lg:aspect-auto",
-  lg: "col-span-2 row-span-2 aspect-[4/3] sm:col-span-2 lg:col-span-6 lg:row-span-2 lg:aspect-auto",
+  sm: "col-span-1 row-span-1 sm:col-span-1 lg:col-span-3 lg:row-span-1",
+  md: "col-span-1 row-span-1 sm:col-span-1 lg:col-span-3 lg:row-span-2",
+  lg: "col-span-2 row-span-1 sm:col-span-2 lg:col-span-6 lg:row-span-2",
 };
 
 const TONES = ["gold", "ember", "violet", "blue"] as const;
@@ -31,7 +31,7 @@ export default function Gallery() {
           </p>
         </motion.div>
 
-        <div className="relative grid auto-rows-[130px] grid-cols-2 gap-3 sm:auto-rows-[170px] sm:gap-4 lg:auto-rows-[150px] lg:grid-cols-12">
+        <div className="relative grid auto-rows-[clamp(9.5rem,42vw,13rem)] grid-cols-2 gap-3 sm:auto-rows-[170px] sm:gap-4 lg:auto-rows-[150px] lg:grid-cols-12">
           {galleryImages.map((img, i) => (
             <motion.div
               key={img.id}

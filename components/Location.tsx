@@ -57,7 +57,7 @@ export default function Location() {
             <div className="flex items-start gap-3.5">
               <MapPin size={18} className="mt-0.5 shrink-0 text-gold" />
               <div>
-                <p className="text-sm text-bone">{r.address}</p>
+                <p className="text-sm text-bone"></p>
                 <p className="text-sm text-smoke">{r.location}</p>
               </div>
             </div>
@@ -70,7 +70,7 @@ export default function Location() {
               <div className="space-y-1">
                 {r.openingHours.map((h, i) => (
                   <p key={i} className="text-sm text-bone">
-                    <span className="text-smoke">{h.days}:</span> {h.hours}
+                    <span className="text-smoke">Monday:</span> 6:am
                   </p>
                 ))}
               </div>

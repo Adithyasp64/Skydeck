@@ -2,6 +2,7 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import type { PanInfo } from "framer-motion";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const POINTS = [
@@ -22,12 +23,27 @@ export default function Experience() {
   const [slideIndex, setSlideIndex] = useState(0);
 
   useEffect(() => {
+    EXPERIENCE_SLIDES.slice(1).forEach((slide) => {
+      const image = new window.Image();
+      image.src = slide.src;
+    });
+
     const timer = window.setInterval(() => {
       setSlideIndex((current) => (current + 1) % EXPERIENCE_SLIDES.length);
     }, 4200);
 
     return () => window.clearInterval(timer);
   }, []);
+
+  function handleSwipe(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
+    if (Math.abs(info.offset.y) < 40) return;
+
+    setSlideIndex((current) =>
+      info.offset.y < 0
+        ? (current + 1) % EXPERIENCE_SLIDES.length
+        : (current - 1 + EXPERIENCE_SLIDES.length) % EXPERIENCE_SLIDES.length,
+    );
+  }
 
   return (
     <section id="experience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
@@ -41,14 +57,18 @@ export default function Experience() {
           className="group relative aspect-[4/5] w-full"
         >
           <div className="absolute -inset-3 border border-gold/20" />
-          <AnimatePresence mode="wait" initial={false}>
+          <AnimatePresence mode="sync" initial={false}>
             <motion.div
               key={EXPERIENCE_SLIDES[slideIndex].src}
               initial={{ opacity: 0, y: 44 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -44 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-0"
+              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+              drag="y"
+              dragConstraints={{ top: 0, bottom: 0 }}
+              dragElastic={0.2}
+              onDragEnd={handleSwipe}
+              className="absolute inset-0 touch-pan-x"
             >
               <AtmosphericFrame
                 src={EXPERIENCE_SLIDES[slideIndex].src}
@@ -68,9 +88,12 @@ export default function Experience() {
           </div>
           <div className="absolute right-5 top-5 flex flex-col gap-2">
             {EXPERIENCE_SLIDES.map((slide, index) => (
-              <span
+              <button
                 key={slide.src}
-                className={`h-6 w-px transition-colors ${index === slideIndex ? "bg-gold" : "bg-bone/30"}`}
+                type="button"
+                onClick={() => setSlideIndex(index)}
+                aria-label={`Show ${slide.label}`}
+                className={`h-6 w-3 border-0 transition-colors ${index === slideIndex ? "bg-gold" : "bg-bone/30"}`}
               />
             ))}
           </div>

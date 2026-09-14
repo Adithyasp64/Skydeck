@@ -20,6 +20,5 @@ export const galleryImages: GalleryImage[] = [
   { id: "g5", src: "/images/gallery/event.jpg", caption: "Live at Skydeck", category: "event", size: "sm" },
   { id: "g6", src: "/images/gallery/drink.jpg", caption: "Cocktail hour", category: "bar", size: "md" },
   { id: "g7", src: "/images/gallery/mural.jpg", caption: "Down the stairs", category: "interior", size: "sm" },
-  { id: "g8", src: "/images/gallery/food-2.jpg", caption: "Straight off the stone", category: "food", size: "md" },
   { id: "g9", src: "/images/gallery/bar.jpg", caption: "The bar", category: "bar", size: "lg" },
 ];

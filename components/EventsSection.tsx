@@ -99,14 +99,41 @@ export default function EventsSection() {
             <h3 className="mb-6 text-xs font-semibold uppercase tracking-widest2 text-smoke">
               Past Events
             </h3>
-            <div className="relative overflow-hidden" aria-label="Past events carousel">
+            <div className="relative sm:hidden" aria-label="Past events carousel">
+              <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-2">
+                {pastCarousel.map((e, index) => (
+                  <div key={`${e.id}-${index}`} className="group relative aspect-[3/4] w-[78vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-sm">
+                    <AtmosphericFrame
+                      src={e.image}
+                      alt={e.title}
+                      tone="blue"
+                      className="h-full w-full grayscale-[0.3] transition-[filter] duration-500 group-hover:grayscale-0"
+                    />
+                    <div className="pointer-events-none absolute inset-0 bg-void/40" />
+                    <span className="absolute right-2 top-2 rounded-sm bg-void/80 px-2 py-1 text-[9px] font-semibold uppercase tracking-widest2 text-smoke">
+                      Event Ended
+                    </span>
+                    <div className="absolute inset-x-0 bottom-0 p-3">
+                      <p className="text-xs font-semibold text-bone">
+                        {e.artist ?? e.title}
+                      </p>
+                      <p className="text-[10px] text-smoke">{formatEventDate(e.date)}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-3 text-[10px] uppercase tracking-widest2 text-smoke/70">
+                Swipe to explore past nights
+              </p>
+            </div>
+            <div className="relative hidden overflow-hidden sm:block" aria-label="Past events carousel">
               <motion.div
                 className="flex w-max gap-3 sm:gap-4"
                 animate={{ x: ["0%", "-33.333%"] }}
                 transition={{ duration: Math.max(18, past.length * 12), ease: "linear", repeat: Infinity }}
               >
                 {pastCarousel.map((e, index) => (
-                  <div key={`${e.id}-${index}`} className="group relative aspect-[3/4] w-[calc((100vw-3.75rem)/2)] max-w-[260px] shrink-0 overflow-hidden rounded-sm sm:w-[calc((100vw-4rem)/3)] lg:w-[calc((min(1120px,100vw)-4.5rem)/4)]">
+                  <div key={`${e.id}-desktop-${index}`} className="group relative aspect-[3/4] w-[calc((100vw-4rem)/3)] max-w-[260px] shrink-0 overflow-hidden rounded-sm lg:w-[calc((min(1120px,100vw)-4.5rem)/4)]">
                     <AtmosphericFrame
                       src={e.image}
                       alt={e.title}
