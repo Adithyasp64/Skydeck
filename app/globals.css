@@ -26,6 +26,28 @@ body {
   background-size: 72px 72px;
 }
 
+.font-athelas {
+  font-family: Athelas, Georgia, serif;
+}
+
+.font-vanguard {
+  font-family: Vanguard, "Arial Narrow", sans-serif;
+}
+
+.hero-accent {
+  font-family: Athelas, Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-shadow: 0 0 28px rgba(217, 179, 108, 0.24);
+}
+
+.hero-lead {
+  font-family: Athelas, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
 ::selection {
   background: #D9B36C;
   color: #050505;

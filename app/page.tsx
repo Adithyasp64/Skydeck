@@ -9,6 +9,7 @@ import ReservationSection from "@/components/ReservationSection";
 import Gallery from "@/components/Gallery";
 import Location from "@/components/Location";
 import Footer from "@/components/Footer";
+import EventPopup from "@/components/EventPopup";
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
       <Gallery />
       <Location />
       <Footer />
+      <EventPopup />
     </main>
   );
 }

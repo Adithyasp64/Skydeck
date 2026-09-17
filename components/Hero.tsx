@@ -9,18 +9,34 @@ const HERO_SLIDES = [
   {
     src: "/images/ambience/hero-main.jpg",
     alt: "Skydeck's main floor at night, lit in warm gold and neon",
+    eyebrow: "RR Nagar • Bengaluru",
+    headline: "Make Tonight a STORY.",
+    accent: "STORY.",
+    description: "Good food. Live energy. Unforgettable nights.",
   },
   {
     src: "/images/ambience/hero-alt.jpg",
     alt: "Skydeck's atmospheric lounge interior",
+    eyebrow: "A TABLE ABOVE THE ORDINARY",
+    headline: "Where Night Feels ALIVE.",
+    accent: "ALIVE.",
+    description: "Settle in for golden hours and electric evenings.",
   },
   {
     src: "/images/ambience/night_life.jpg",
     alt: "Skydeck's wide lounge space",
+    eyebrow: "EAT • DRINK • UNWIND",
+    headline: "Good Times Served, LOUD.",
+    accent: "LOUD.",
+    description: "Signature pours, bold plates, and a room that moves.",
   },
   {
     src: "/images/gallery/bar.jpg",
     alt: "Skydeck's greenery-lined dining hall",
+    eyebrow: "YOUR NEXT NIGHT OUT",
+    headline: "Rooftop Energy, REFINED.",
+    accent: "REFINED.",
+    description: "Come for the view. Stay for the feeling.",
   },
 ];
 
@@ -106,32 +122,28 @@ export default function Hero() {
         className="relative z-10 w-full px-6 pb-20 lg:px-10 lg:pb-28"
       >
         <div className="mx-auto max-w-7xl">
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            className="mb-5 text-xs font-semibold uppercase tracking-widest2 text-gold"
-          >
-            RR Nagar • Bengaluru
-          </motion.p>
+          <AnimatePresence initial={false} mode="wait">
+            <motion.div
+              key={slideIndex}
+              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -14 }}
+              transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <p className="mb-5 text-xs font-semibold uppercase tracking-widest2 text-gold">
+                {HERO_SLIDES[slideIndex].eyebrow}
+              </p>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.35 }}
-            className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
-          >
-            MAKE TONIGHT A STORY.
-          </motion.h1>
+              <h1 className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl">
+                {HERO_SLIDES[slideIndex].headline.replace(HERO_SLIDES[slideIndex].accent, "")}
+                <span className="text-gold">{HERO_SLIDES[slideIndex].accent}</span>
+              </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-            className="mt-5 max-w-md text-lg text-smoke"
-          >
-           Good Food . Live Energy . Unforgettable Nights . 
-          </motion.p>
+              <p className="mt-5 max-w-md text-lg text-smoke">
+                {HERO_SLIDES[slideIndex].description}
+              </p>
+            </motion.div>
+          </AnimatePresence>
 
           <motion.div
             initial={{ opacity: 0, y: 16 }}
