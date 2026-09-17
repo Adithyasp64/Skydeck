@@ -1,12 +1,34 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 
+const HERO_SLIDES = [
+  {
+    src: "/images/ambience/hero-main.jpg",
+    alt: "Skydeck's main floor at night, lit in warm gold and neon",
+  },
+  {
+    src: "/images/ambience/hero-alt.jpg",
+    alt: "Skydeck's atmospheric lounge interior",
+  },
+  {
+    src: "/images/ambience/night_life.jpg",
+    alt: "Skydeck's wide lounge space",
+  },
+  {
+    src: "/images/gallery/bar.jpg",
+    alt: "Skydeck's greenery-lined dining hall",
+  },
+];
+
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
+  const [slideIndex, setSlideIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end start"],
@@ -15,6 +37,23 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+
+  useEffect(() => {
+    HERO_SLIDES.slice(1).forEach(({ src }) => {
+      const image = new window.Image();
+      image.src = src;
+    });
+  }, []);
+
+  useEffect(() => {
+    if (isPaused || shouldReduceMotion) return;
+
+    const timer = window.setInterval(() => {
+      setSlideIndex((current) => (current + 1) % HERO_SLIDES.length);
+    }, 5200);
+
+    return () => window.clearInterval(timer);
+  }, [isPaused, shouldReduceMotion]);
 
   const scrollToExperience = () => {
     document.querySelector("#experience")?.scrollIntoView({ behavior: "smooth" });
@@ -26,15 +65,36 @@ export default function Hero() {
       ref={ref}
       className="relative flex h-[100svh] w-full items-end overflow-hidden bg-void"
     >
-      <motion.div style={{ scale }} className="absolute inset-0">
-        <Image
-          src="/images/ambience/hero-main.jpg"
-          alt="Skydeck's main floor at night, lit in warm gold and neon"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
+      <motion.div
+        style={{ scale }}
+        className="absolute inset-0"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+        onFocus={() => setIsPaused(true)}
+        onBlur={() => setIsPaused(false)}
+      >
+        <AnimatePresence initial={false} mode="sync">
+          <motion.div
+            key={HERO_SLIDES[slideIndex].src}
+            initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 28 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: shouldReduceMotion ? 0 : -28 }}
+            transition={{
+              duration: shouldReduceMotion ? 0.01 : 1.1,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={HERO_SLIDES[slideIndex].src}
+              alt={HERO_SLIDES[slideIndex].alt}
+              fill
+              priority={slideIndex === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </motion.div>
+        </AnimatePresence>
       </motion.div>
 
       {/* readability + mood overlays */}
