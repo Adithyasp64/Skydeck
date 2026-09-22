@@ -63,6 +63,22 @@ body {
   will-change: transform;
 }
 
+.hero-mobile-video {
+  opacity: 0.96;
+  transform: scale(1.03);
+  animation: hero-mobile-video-drift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes hero-mobile-video-drift {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
 @keyframes event-cinema-ken-burns {
   from {
     transform: perspective(900px) rotateX(var(--event-y, 0deg)) rotateY(var(--event-x, 0deg)) scale(1.02);
@@ -116,6 +132,11 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero-mobile-video {
+    animation: none;
+    transform: scale(1.03);
+  }
+
   .event-cinema-image,
   .event-cinema-sweep::after {
     animation: none;

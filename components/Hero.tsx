@@ -54,6 +54,8 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 72]);
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 639px)").matches) return;
+
     HERO_SLIDES.slice(1).forEach(({ src }) => {
       const image = new window.Image();
       image.src = src;
@@ -61,6 +63,7 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
+    if (window.matchMedia("(max-width: 639px)").matches) return;
     if (isPaused || shouldReduceMotion) return;
 
     const timer = window.setInterval(() => {
@@ -82,7 +85,25 @@ export default function Hero() {
     >
       <motion.div
         style={{ y }}
-        className="absolute inset-0"
+        className="absolute inset-[-5%] sm:hidden"
+        aria-hidden="true"
+      >
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/images/ambience/hero-main.jpg"
+          className="hero-mobile-video h-full w-full object-cover"
+        >
+          <source src="/videos/bg_clip.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
+
+      <motion.div
+        style={{ y }}
+        className="absolute inset-0 hidden sm:block"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onFocus={() => setIsPaused(true)}
@@ -142,7 +163,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
-                className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
+                className="max-w-3xl font-display text-4xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
               >
                 {HERO_SLIDES[slideIndex].headline.replace(HERO_SLIDES[slideIndex].accent, "")}
                 <span className="text-gold">{HERO_SLIDES[slideIndex].accent}</span>
@@ -152,7 +173,7 @@ export default function Hero() {
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: shouldReduceMotion ? 0.01 : 0.75, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
-                className="mt-5 max-w-md text-lg text-smoke"
+                className="mt-4 max-w-md text-base text-smoke sm:mt-5 sm:text-lg"
               >
                 {HERO_SLIDES[slideIndex].description}
               </motion.p>
@@ -163,19 +184,19 @@ export default function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.7 }}
-            className="mt-9 flex flex-wrap gap-4"
+            className="mt-7 flex flex-wrap gap-3 sm:mt-9 sm:gap-4"
           >
             <button
               onClick={() =>
                 document.querySelector("#reservation")?.scrollIntoView({ behavior: "smooth" })
               }
-              className="rounded-sm bg-gold px-7 py-3.5 text-sm font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 ease-cinematic hover:-translate-y-0.5 hover:bg-goldSoft"
+              className="rounded-sm bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 ease-cinematic hover:-translate-y-0.5 hover:bg-goldSoft sm:px-7 sm:py-3.5 sm:text-sm"
             >
               Reserve a Table
             </button>
             <button
               onClick={scrollToExperience}
-              className="rounded-sm border border-bone/30 px-7 py-3.5 text-sm font-semibold uppercase tracking-widest2 text-bone transition-all duration-300 ease-cinematic hover:-translate-y-0.5 hover:border-bone/70"
+              className="rounded-sm border border-bone/30 px-5 py-3 text-xs font-semibold uppercase tracking-widest2 text-bone transition-all duration-300 ease-cinematic hover:-translate-y-0.5 hover:border-bone/70 sm:px-7 sm:py-3.5 sm:text-sm"
             >
               Explore Skydeck
             </button>
