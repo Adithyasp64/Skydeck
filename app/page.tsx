@@ -10,6 +10,7 @@ import Gallery from "@/components/Gallery";
 import Location from "@/components/Location";
 import Footer from "@/components/Footer";
 import EventPopup from "@/components/EventPopup";
+import InstagramFloat from "@/components/InstagramFloat";
 
 export default function Home() {
   return (
@@ -26,6 +27,7 @@ export default function Home() {
       <Location />
       <Footer />
       <EventPopup />
+      <InstagramFloat />
     </main>
   );
 }
