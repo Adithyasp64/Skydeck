@@ -1,8 +1,7 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-import type { PanInfo } from "framer-motion";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const POINTS = [
@@ -21,6 +20,7 @@ const EXPERIENCE_SLIDES = [
 
 export default function Experience() {
   const [slideIndex, setSlideIndex] = useState(0);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     EXPERIENCE_SLIDES.slice(1).forEach((slide) => {
@@ -30,20 +30,10 @@ export default function Experience() {
 
     const timer = window.setInterval(() => {
       setSlideIndex((current) => (current + 1) % EXPERIENCE_SLIDES.length);
-    }, 4200);
+    }, 4800);
 
     return () => window.clearInterval(timer);
   }, []);
-
-  function handleSwipe(_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) {
-    if (Math.abs(info.offset.y) < 40) return;
-
-    setSlideIndex((current) =>
-      info.offset.y < 0
-        ? (current + 1) % EXPERIENCE_SLIDES.length
-        : (current - 1 + EXPERIENCE_SLIDES.length) % EXPERIENCE_SLIDES.length,
-    );
-  }
 
   return (
     <section id="experience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
@@ -57,45 +47,73 @@ export default function Experience() {
           className="group relative aspect-[4/5] w-full"
         >
           <div className="absolute -inset-3 border border-gold/20" />
-          <AnimatePresence mode="sync" initial={false}>
+          <div className="relative h-full overflow-hidden rounded-sm lg:hidden">
             <motion.div
-              key={EXPERIENCE_SLIDES[slideIndex].src}
-              initial={{ opacity: 0, y: 44 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -44 }}
-              transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              drag="y"
-              dragConstraints={{ top: 0, bottom: 0 }}
-              dragElastic={0.2}
-              onDragEnd={handleSwipe}
-              className="absolute inset-0 touch-pan-x"
+              className="flex h-full w-[800%] gap-3 bg-void"
+              animate={shouldReduceMotion ? { x: 0 } : { x: ["0%", "-50%"] }}
+              transition={
+                shouldReduceMotion
+                  ? { duration: 0.01 }
+                  : { duration: 28, ease: "linear", repeat: Infinity }
+              }
             >
-              <AtmosphericFrame
-                src={EXPERIENCE_SLIDES[slideIndex].src}
-                alt={EXPERIENCE_SLIDES[slideIndex].label}
-                cursorLabel="View"
-                className="h-full w-full rounded-sm"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
+              {[...EXPERIENCE_SLIDES, ...EXPERIENCE_SLIDES].map((slide, index) => (
+                <div key={`${slide.src}-${index}`} className="relative h-full w-[calc(12.5%-0.75rem)] shrink-0">
+                  <AtmosphericFrame
+                    src={slide.src}
+                    alt={slide.label}
+                    className="h-full w-full"
+                    sizes="100vw"
+                  />
+                  <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent" />
+                  <div className="absolute bottom-5 left-5 flex items-center gap-3">
+                    <span className="h-px w-8 bg-gold" />
+                    <span className="text-[10px] font-medium uppercase tracking-widest2 text-bone">
+                      {slide.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
             </motion.div>
-          </AnimatePresence>
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent" />
-          <div className="absolute bottom-5 left-5 flex items-center gap-3">
-            <span className="h-px w-8 bg-gold" />
-            <span className="text-[10px] font-medium uppercase tracking-widest2 text-bone">
-              {EXPERIENCE_SLIDES[slideIndex].label}
-            </span>
           </div>
-          <div className="absolute right-5 top-5 flex flex-col gap-2">
-            {EXPERIENCE_SLIDES.map((slide, index) => (
-              <button
-                key={slide.src}
-                type="button"
-                onClick={() => setSlideIndex(index)}
-                aria-label={`Show ${slide.label}`}
-                className={`h-6 w-3 border-0 transition-colors ${index === slideIndex ? "bg-gold" : "bg-bone/30"}`}
-              />
-            ))}
+
+          <div className="relative hidden h-full overflow-hidden rounded-sm lg:block">
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={EXPERIENCE_SLIDES[slideIndex].src}
+                initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 36 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -36 }}
+                transition={{ duration: shouldReduceMotion ? 0.01 : 1.2, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0"
+              >
+                <AtmosphericFrame
+                  src={EXPERIENCE_SLIDES[slideIndex].src}
+                  alt={EXPERIENCE_SLIDES[slideIndex].label}
+                  cursorLabel="View"
+                  className="h-full w-full"
+                  sizes="50vw"
+                />
+              </motion.div>
+            </AnimatePresence>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent" />
+            <div className="absolute bottom-5 left-5 flex items-center gap-3">
+              <span className="h-px w-8 bg-gold" />
+              <span className="text-[10px] font-medium uppercase tracking-widest2 text-bone">
+                {EXPERIENCE_SLIDES[slideIndex].label}
+              </span>
+            </div>
+            <div className="absolute right-5 top-5 flex flex-col gap-2">
+              {EXPERIENCE_SLIDES.map((slide, index) => (
+                <button
+                  key={slide.src}
+                  type="button"
+                  onClick={() => setSlideIndex(index)}
+                  aria-label={`Show ${slide.label}`}
+                  className={`h-6 w-3 border-0 transition-colors ${index === slideIndex ? "bg-gold" : "bg-bone/30"}`}
+                />
+              ))}
+            </div>
           </div>
         </motion.div>
 

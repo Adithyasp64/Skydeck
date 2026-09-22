@@ -50,9 +50,8 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-  const y = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const y = useTransform(scrollYProgress, [0, 1], [0, 72]);
 
   useEffect(() => {
     HERO_SLIDES.slice(1).forEach(({ src }) => {
@@ -82,7 +81,7 @@ export default function Hero() {
       className="relative flex h-[100svh] w-full items-end overflow-hidden bg-void"
     >
       <motion.div
-        style={{ scale }}
+        style={{ y }}
         className="absolute inset-0"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
@@ -107,7 +106,7 @@ export default function Hero() {
               fill
               priority={slideIndex === 0}
               sizes="100vw"
-              className="object-cover"
+              className="hero-ken-burns object-cover"
             />
           </motion.div>
         </AnimatePresence>
@@ -130,18 +129,33 @@ export default function Hero() {
               exit={{ opacity: 0, y: shouldReduceMotion ? 0 : -14 }}
               transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <p className="mb-5 text-xs font-semibold uppercase tracking-widest2 text-gold">
+              <motion.p
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, delay: 0.08, ease: [0.16, 1, 0.3, 1] }}
+                className="mb-5 text-xs font-semibold uppercase tracking-widest2 text-gold"
+              >
                 {HERO_SLIDES[slideIndex].eyebrow}
-              </p>
+              </motion.p>
 
-              <h1 className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl">
+              <motion.h1
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
+                className="max-w-3xl font-display text-5xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
+              >
                 {HERO_SLIDES[slideIndex].headline.replace(HERO_SLIDES[slideIndex].accent, "")}
                 <span className="text-gold">{HERO_SLIDES[slideIndex].accent}</span>
-              </h1>
+              </motion.h1>
 
-              <p className="mt-5 max-w-md text-lg text-smoke">
+              <motion.p
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: shouldReduceMotion ? 0.01 : 0.75, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
+                className="mt-5 max-w-md text-lg text-smoke"
+              >
                 {HERO_SLIDES[slideIndex].description}
-              </p>
+              </motion.p>
             </motion.div>
           </AnimatePresence>
 

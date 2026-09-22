@@ -1,7 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import Image from "next/image";
+import { useRef } from "react";
 import { events } from "@/data/events";
 import { sortEvents, formatEventDate } from "@/lib/events";
 import AtmosphericFrame from "./AtmosphericFrame";
@@ -10,6 +12,7 @@ export default function EventsSection() {
   const { upcoming, past } = sortEvents(events);
   const [featured, ...restUpcoming] = upcoming;
   const pastCarousel = past.length > 0 ? [...past, ...past, ...past] : [];
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section id="events" className="section-glow relative overflow-hidden bg-char py-24 lg:py-32">
@@ -30,12 +33,7 @@ export default function EventsSection() {
         </motion.div>
 
         {!featured && (
-          <div className="rounded-sm border border-line bg-char2 p-10 text-center">
-            <p className="text-smoke">
-              Nothing on the calendar right now — check back soon, or follow
-              along on Instagram for the next announcement.
-            </p>
-          </div>
+          <OngoingEvents />
         )}
 
         {featured && (
@@ -99,10 +97,18 @@ export default function EventsSection() {
             <h3 className="mb-6 text-xs font-semibold uppercase tracking-widest2 text-smoke">
               Past Events
             </h3>
-            <div className="relative sm:hidden" aria-label="Past events carousel">
-              <div className="no-scrollbar flex snap-x snap-mandatory gap-3 overflow-x-auto overscroll-x-contain pb-2">
+            <div className="relative overflow-hidden sm:hidden" aria-label="Past events carousel">
+              <motion.div
+                className="flex w-max gap-3 pb-2"
+                animate={shouldReduceMotion ? { x: 0 } : { x: ["0%", "-33.333%"] }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0.01 }
+                    : { duration: Math.max(24, past.length * 8), ease: "linear", repeat: Infinity }
+                }
+              >
                 {pastCarousel.map((e, index) => (
-                  <div key={`${e.id}-${index}`} className="group relative aspect-[3/4] w-[78vw] max-w-[280px] shrink-0 snap-start overflow-hidden rounded-sm">
+                  <div key={`${e.id}-${index}`} className="group relative aspect-[3/4] w-[78vw] max-w-[280px] shrink-0 overflow-hidden rounded-sm">
                     <AtmosphericFrame
                       src={e.image}
                       alt={e.title}
@@ -121,16 +127,17 @@ export default function EventsSection() {
                     </div>
                   </div>
                 ))}
-              </div>
-              <p className="mt-3 text-[10px] uppercase tracking-widest2 text-smoke/70">
-                Swipe to explore past nights
-              </p>
+              </motion.div>
             </div>
             <div className="relative hidden overflow-hidden sm:block" aria-label="Past events carousel">
               <motion.div
                 className="flex w-max gap-3 sm:gap-4"
-                animate={{ x: ["0%", "-33.333%"] }}
-                transition={{ duration: Math.max(18, past.length * 12), ease: "linear", repeat: Infinity }}
+                animate={shouldReduceMotion ? { x: 0 } : { x: ["0%", "-33.333%"] }}
+                transition={
+                  shouldReduceMotion
+                    ? { duration: 0.01 }
+                    : { duration: Math.max(18, past.length * 12), ease: "linear", repeat: Infinity }
+                }
               >
                 {pastCarousel.map((e, index) => (
                   <div key={`${e.id}-desktop-${index}`} className="group relative aspect-[3/4] w-[calc((100vw-4rem)/3)] max-w-[260px] shrink-0 overflow-hidden rounded-sm lg:w-[calc((min(1120px,100vw)-4.5rem)/4)]">
@@ -158,6 +165,77 @@ export default function EventsSection() {
         )}
       </div>
     </section>
+  );
+}
+
+function OngoingEvents() {
+  const imageRef = useRef<HTMLDivElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (shouldReduceMotion || !imageRef.current) return;
+
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
+    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
+    imageRef.current.style.setProperty("--event-x", `${x * 0.8}deg`);
+    imageRef.current.style.setProperty("--event-y", `${y * -0.8}deg`);
+  }
+
+  function resetPointer() {
+    imageRef.current?.style.setProperty("--event-x", "0deg");
+    imageRef.current?.style.setProperty("--event-y", "0deg");
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: shouldReduceMotion ? 0.01 : 0.9, ease: [0.16, 1, 0.3, 1] }}
+      className="event-cinema-sweep group relative isolate min-h-[34rem] overflow-hidden rounded-sm bg-char2 sm:min-h-[38rem] lg:min-h-[34rem]"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
+      <div
+        ref={imageRef}
+        className="event-cinema-image absolute inset-[-3%]"
+        style={{ "--event-x": "0deg", "--event-y": "0deg" } as React.CSSProperties}
+      >
+        <Image
+          src="/images/events/event 3.jpg"
+          alt="Skydeck at night with a lively crowd"
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+      </div>
+      <div className="absolute inset-0 bg-gradient-to-r from-void/90 via-void/55 to-void/25" />
+      <div className="absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-void/15" />
+
+      <div className="relative flex min-h-[34rem] flex-col justify-between p-6 sm:min-h-[38rem] sm:p-10 lg:min-h-[34rem] lg:p-14">
+        <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest2 text-gold">
+          <span className="h-px w-8 bg-gold" />
+          Live at Skydeck
+        </div>
+
+        <div className="max-w-3xl">
+          <p className="mb-5 max-w-xs text-xs uppercase tracking-widest2 text-smoke">
+            Music <span className="px-1 text-gold">•</span> Drinks <span className="px-1 text-gold">•</span> Late Nights
+          </p>
+          <h2 className="max-w-2xl font-display text-5xl font-bold leading-[0.94] text-bone sm:text-7xl lg:text-8xl">
+            The night is calling.
+          </h2>
+          <Link
+            href="#reservation"
+            className="event-cinema-cta mt-8 inline-flex items-center gap-4 border-b border-gold pb-3 text-xs font-semibold uppercase tracking-widest2 text-gold sm:mt-10"
+          >
+            Enter the night
+            <span aria-hidden="true" className="text-lg leading-none transition-transform duration-300 group-hover:translate-x-1.5">-&gt;</span>
+          </Link>
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
