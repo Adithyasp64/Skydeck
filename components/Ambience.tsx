@@ -48,7 +48,7 @@ export default function Ambience() {
           className="mb-14 max-w-xl"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            The Skydeck experience.
+            The <span className="text-gold">Skydeck</span> experience.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-smoke">
             Gold light, hanging green, and a bar that changes colour through

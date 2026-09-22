@@ -117,7 +117,7 @@ export default function ReservationSection() {
           className="mb-12 text-center"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            Save your table.
+            Save your <span className="text-gold">table.</span>
           </h2>
           <p className="mt-4 text-base text-smoke">
             Tell us the essentials — we&apos;ll take care of the rest.

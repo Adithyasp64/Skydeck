@@ -45,7 +45,7 @@ export default function Location() {
           transition={{ duration: 0.7 }}
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            Find your way up.
+            Find your <span className="text-gold">way up.</span>
           </h2>
 
           <div className="mt-8">

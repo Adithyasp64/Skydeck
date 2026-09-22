@@ -18,7 +18,7 @@ export default function CuisineShowcase() {
           className="mb-14 max-w-xl"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            Come hungry.
+            Come <span className="text-gold">hungry.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-smoke">
             A kitchen that moves across cuisines without losing the plot —

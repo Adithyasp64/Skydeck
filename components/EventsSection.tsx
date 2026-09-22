@@ -25,7 +25,7 @@ export default function EventsSection() {
           className="mb-14 max-w-xl"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            What&apos;s happening at Skydeck.
+            What&apos;s <span className="text-gold">happening</span> at Skydeck.
           </h2>
           <p className="mt-4 text-base leading-relaxed text-smoke">
             Live sets, DJ nights and evenings worth planning around.
@@ -224,7 +224,7 @@ function OngoingEvents() {
             Music <span className="px-1 text-gold">•</span> Drinks <span className="px-1 text-gold">•</span> Late Nights
           </p>
           <h2 className="max-w-2xl font-display text-5xl font-bold leading-[0.94] text-bone sm:text-7xl lg:text-8xl">
-            The night is calling.
+            The <span className="text-gold">night</span> is calling.
           </h2>
           <Link
             href="#reservation"

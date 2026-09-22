@@ -125,7 +125,7 @@ export default function Experience() {
           className="flex flex-col justify-center"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            More than just a meal.
+            More than just a <span className="text-gold">meal.</span>
           </h2>
           <p className="mt-6 max-w-lg text-base leading-relaxed text-smoke">
             Skydeck isn&apos;t built around one thing. It&apos;s the place you land

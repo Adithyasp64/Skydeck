@@ -24,7 +24,7 @@ export default function Gallery() {
           className="mb-14 max-w-xl"
         >
           <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            A little look inside.
+            A little look <span className="text-gold">inside.</span>
           </h2>
           <p className="mt-4 text-base leading-relaxed text-smoke">
             Interiors, food, the bar, the crowd — a quick walk through Skydeck.

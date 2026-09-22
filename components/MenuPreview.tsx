@@ -19,7 +19,7 @@ export default function MenuPreview() {
         >
           <div className="max-w-xl">
             <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-              A few things worth ordering.
+              A few things worth <span className="text-gold">ordering.</span>
             </h2>
             <p className="mt-4 text-base leading-relaxed text-smoke">
               Not the whole menu — just the dishes people keep coming back for.
