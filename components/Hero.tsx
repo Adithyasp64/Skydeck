@@ -63,8 +63,7 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (window.matchMedia("(max-width: 639px)").matches) return;
-    if (isPaused || shouldReduceMotion) return;
+    if (isPaused) return;
 
     const timer = window.setInterval(() => {
       setSlideIndex((current) => (current + 1) % HERO_SLIDES.length);
