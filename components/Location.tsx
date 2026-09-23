@@ -77,13 +77,15 @@ export default function Location() {
             </div>
             <div className="flex items-start gap-3.5">
               <Instagram size={18} className="mt-0.5 shrink-0 text-gold" />
-              <p className="text-sm text-bone">{r.instagram}</p>
+              <a href="https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw%3D%3D" target="_blank" rel="noopener noreferrer">
+                <p className="text-sm text-bone">{r.instagram}</p>
+              </a>
             </div>
           </div>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href={r.mapsUrl}
+              href={"https://www.google.com/maps/place/skydeck+rr+nagar/data=!4m2!3m1!1s0x3bae3f61cf1b851b:0x1a90962c08949642?sa=X&ved=1t:242&ictx=111"}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-sm bg-gold px-6 py-3.5 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 hover:-translate-y-0.5"

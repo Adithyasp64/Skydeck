@@ -2,10 +2,10 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import Image from "next/image";
-import { useRef } from "react";
+import { ArrowUpRight, CalendarDays, Instagram } from "lucide-react";
 import { events } from "@/data/events";
 import { sortEvents, formatEventDate } from "@/lib/events";
+import { restaurantInfo } from "@/data/restaurant";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 export default function EventsSection() {
@@ -169,23 +169,8 @@ export default function EventsSection() {
 }
 
 function OngoingEvents() {
-  const imageRef = useRef<HTMLDivElement>(null);
   const shouldReduceMotion = useReducedMotion();
-
-  function handlePointerMove(event: React.PointerEvent<HTMLDivElement>) {
-    if (shouldReduceMotion || !imageRef.current) return;
-
-    const bounds = event.currentTarget.getBoundingClientRect();
-    const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 2;
-    const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * 2;
-    imageRef.current.style.setProperty("--event-x", `${x * 0.8}deg`);
-    imageRef.current.style.setProperty("--event-y", `${y * -0.8}deg`);
-  }
-
-  function resetPointer() {
-    imageRef.current?.style.setProperty("--event-x", "0deg");
-    imageRef.current?.style.setProperty("--event-y", "0deg");
-  }
+  const instagramUrl = `https://www.instagram.com/${restaurantInfo.instagram.replace(/^@/, "")}/`;
 
   return (
     <motion.div
@@ -193,45 +178,58 @@ function OngoingEvents() {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
       transition={{ duration: shouldReduceMotion ? 0.01 : 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="event-cinema-sweep group relative isolate min-h-[34rem] overflow-hidden rounded-sm bg-char2 sm:min-h-[38rem] lg:min-h-[34rem]"
-      onPointerMove={handlePointerMove}
-      onPointerLeave={resetPointer}
+      className="relative isolate overflow-hidden rounded-sm border border-line bg-char2"
     >
-      <div
-        ref={imageRef}
-        className="event-cinema-image absolute inset-[-3%]"
-        style={{ "--event-x": "0deg", "--event-y": "0deg" } as React.CSSProperties}
-      >
-        <Image
-          src="/images/events/event 3.jpg"
-          alt="Skydeck at night with a lively crowd"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-r from-void/90 via-void/55 to-void/25" />
-      <div className="absolute inset-0 bg-gradient-to-t from-void/85 via-transparent to-void/15" />
+      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-gold/10 blur-3xl" />
+      <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:p-14">
+        <div className="flex flex-col justify-between">
+          <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest2 text-gold">
+            <span className="h-px w-8 bg-gold" />
+            Live at Skydeck
+          </div>
 
-      <div className="relative flex min-h-[34rem] flex-col justify-between p-6 sm:min-h-[38rem] sm:p-10 lg:min-h-[34rem] lg:p-14">
-        <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest2 text-gold">
-          <span className="h-px w-8 bg-gold" />
-          Live at Skydeck
+          <div className="mt-16 lg:mt-24">
+            <p className="mb-5 flex items-center gap-2 text-xs uppercase tracking-widest2 text-smoke">
+              <CalendarDays size={14} className="text-gold" />
+              Fresh nights, posted here first
+            </p>
+            <h2 className="max-w-2xl font-display text-5xl font-bold leading-[0.94] text-bone sm:text-7xl">
+              The <span className="text-gold">night</span> is calling.
+            </h2>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-smoke sm:text-base">
+              New gigs and special nights land on our Instagram as they happen. Follow along for the latest lineup, then make a night of it.
+            </p>
+          </div>
         </div>
 
-        <div className="max-w-3xl">
-          <p className="mb-5 max-w-xs text-xs uppercase tracking-widest2 text-smoke">
-            Music <span className="px-1 text-gold">•</span> Drinks <span className="px-1 text-gold">•</span> Late Nights
-          </p>
-          <h2 className="max-w-2xl font-display text-5xl font-bold leading-[0.94] text-bone sm:text-7xl lg:text-8xl">
-            The <span className="text-gold">night</span> is calling.
-          </h2>
+        <div className="flex flex-col justify-end gap-4">
+          <motion.a
+            href={instagramUrl}
+            target="_blank"
+            rel="noreferrer"
+            whileHover={shouldReduceMotion ? undefined : { y: -5 }}
+            whileTap={{ scale: 0.98 }}
+            className="group relative overflow-hidden rounded-sm border border-gold/40 bg-void/60 p-5 transition-colors duration-300 hover:border-gold sm:p-6"
+            aria-label={`Open ${restaurantInfo.instagram} on Instagram`}
+          >
+            <div className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
+            <div className="flex items-start justify-between gap-4">
+              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 text-gold">
+                <Instagram size={21} strokeWidth={1.6} />
+              </span>
+              <ArrowUpRight className="text-smoke transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-gold" size={20} />
+            </div>
+            <p className="mt-8 text-[10px] font-semibold uppercase tracking-widest2 text-smoke">See what&apos;s on</p>
+            <p className="mt-2 break-all font-display text-2xl font-bold text-bone sm:text-3xl">{restaurantInfo.instagram}</p>
+            <p className="mt-3 text-sm leading-relaxed text-smoke">Latest events, live moments and last-minute announcements.</p>
+          </motion.a>
+
           <Link
             href="#reservation"
-            className="event-cinema-cta mt-8 inline-flex items-center gap-4 border-b border-gold pb-3 text-xs font-semibold uppercase tracking-widest2 text-gold sm:mt-10"
+            className="event-cinema-cta group inline-flex min-h-14 items-center justify-between rounded-sm bg-gold px-5 py-4 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 hover:-translate-y-1 sm:px-6"
           >
-            Enter the night
-            <span aria-hidden="true" className="text-lg leading-none transition-transform duration-300 group-hover:translate-x-1.5">-&gt;</span>
+            Book a table
+            <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
           </Link>
         </div>
       </div>

@@ -6,7 +6,8 @@ import AtmosphericFrame from "./AtmosphericFrame";
 const TILES = [
   {
     src: "/images/ambience/bar-glow.jpg",
-    caption: "The lights",
+    videoSrc: "/videos/skydeck_gallery.mp4",
+    caption: "In The World of Skydeck",
     tone: "gold" as const,
     span: "col-span-2 row-span-2 aspect-[4/5] sm:aspect-[16/13] lg:col-span-6 lg:row-span-2 lg:row-start-1 lg:aspect-auto",
   },
@@ -66,14 +67,30 @@ export default function Ambience() {
               transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1], delay: i * 0.08 }}
               className={`group relative overflow-hidden rounded-sm ${tile.span}`}
             >
-              <AtmosphericFrame
-                src={tile.src}
-                alt={`Skydeck — ${tile.caption.toLowerCase()}`}
-                cursorLabel="View"
-                tone={tile.tone}
-                className="h-full w-full"
-                sizes="(min-width: 1024px) 40vw, 50vw"
-              />
+              {tile.videoSrc ? (
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  poster={tile.src}
+                  aria-hidden="true"
+                  className="ambience-mobile-video absolute inset-0 h-full w-full object-cover sm:hidden"
+                >
+                  <source src={tile.videoSrc} type="video/mp4" />
+                </video>
+              ) : null}
+              <div className={tile.videoSrc ? "hidden sm:block h-full w-full" : "h-full w-full"}>
+                <AtmosphericFrame
+                  src={tile.src}
+                  alt={`Skydeck — ${tile.caption.toLowerCase()}`}
+                  cursorLabel="View"
+                  tone={tile.tone}
+                  className="h-full w-full"
+                  sizes="(min-width: 1024px) 40vw, 50vw"
+                />
+              </div>
               <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-void/70 via-transparent to-transparent opacity-70 transition-opacity duration-500 group-hover:opacity-90" />
               <span className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-widest2 text-bone">
                 {tile.caption}
