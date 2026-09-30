@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
-import { ArrowUpRight, CalendarDays, Instagram } from "lucide-react";
+import { ArrowUpRight, Instagram, MapPin } from "lucide-react";
 import { events } from "@/data/events";
 import { sortEvents, formatEventDate } from "@/lib/events";
 import { restaurantInfo } from "@/data/restaurant";
@@ -170,70 +170,118 @@ export default function EventsSection() {
 
 function OngoingEvents() {
   const shouldReduceMotion = useReducedMotion();
-  const instagramUrl = `https://www.instagram.com/${restaurantInfo.instagram.replace(/^@/, "")}/`;
+  const branches = [
+    {
+      name: "RR Nagar",
+      city: "Bengaluru",
+      instagram: restaurantInfo.instagram,
+      instagramUrl: `https://www.instagram.com/${restaurantInfo.instagram.replace(/^@/, "")}/`,
+      marker: "RR",
+      artwork: "from-[#3A2B1D] via-[#211A14] to-[#101010]",
+      accent: "text-gold",
+      border: "border-gold/30 hover:border-gold/70",
+      hoverAccent: "group-hover:text-gold",
+    },
+    {
+      name: "Mysuru",
+      city: "Mysuru",
+      instagram: "@skydeck_mysuru",
+      instagramUrl: "https://www.instagram.com/skydeck.mysuru/?hl=en",
+      marker: "MY",
+      artwork: "from-[#1E3032] via-[#172122] to-[#101010]",
+      accent: "text-[#9BC7C2]",
+      border: "border-[#9BC7C2]/30 hover:border-[#9BC7C2]/70",
+      hoverAccent: "group-hover:text-[#9BC7C2]",
+    },
+  ];
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: shouldReduceMotion ? 0.01 : 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="relative isolate overflow-hidden rounded-sm border border-line bg-char2"
-    >
-      <div className="absolute -right-24 -top-24 h-64 w-64 rounded-full bg-gold/10 blur-3xl" />
-      <div className="relative grid gap-8 p-6 sm:p-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:p-14">
-        <div className="flex flex-col justify-between">
-          <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest2 text-gold">
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: shouldReduceMotion ? 0.01 : 0.7, ease: [0.16, 1, 0.3, 1] }}
+        className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between"
+      >
+        <div>
+          <div className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-widest2 text-gold">
             <span className="h-px w-8 bg-gold" />
             Live at Skydeck
           </div>
-
-          <div className="mt-16 lg:mt-24">
-            <p className="mb-5 flex items-center gap-2 text-xs uppercase tracking-widest2 text-smoke">
-              <CalendarDays size={14} className="text-gold" />
-              Fresh nights, posted here first
-            </p>
-            <h2 className="max-w-2xl font-display text-5xl font-bold leading-[0.94] text-bone sm:text-7xl">
-              The <span className="text-gold">night</span> is calling.
-            </h2>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-smoke sm:text-base">
-              New gigs and special nights land on our Instagram as they happen. Follow along for the latest lineup, then make a night of it.
-            </p>
-          </div>
+          <h2 className="max-w-2xl font-display text-4xl font-bold leading-[0.98] text-bone sm:text-6xl">
+            Your city. <span className="text-gold">Your Skydeck.</span>
+          </h2>
         </div>
+        <p className="max-w-sm text-sm leading-relaxed text-smoke sm:pb-1 sm:text-base">
+          Follow your nearest branch for fresh nights, live sets and the latest lineup.
+        </p>
+      </motion.div>
 
-        <div className="flex flex-col justify-end gap-4">
-          <motion.a
-            href={instagramUrl}
-            target="_blank"
-            rel="noreferrer"
-            whileHover={shouldReduceMotion ? undefined : { y: -5 }}
-            whileTap={{ scale: 0.98 }}
-            className="group relative overflow-hidden rounded-sm border border-gold/40 bg-void/60 p-5 transition-colors duration-300 hover:border-gold sm:p-6"
-            aria-label={`Open ${restaurantInfo.instagram} on Instagram`}
-          >
-            <div className="absolute inset-x-0 top-0 h-px origin-left scale-x-0 bg-gold transition-transform duration-500 group-hover:scale-x-100" />
-            <div className="flex items-start justify-between gap-4">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full border border-gold/40 text-gold">
-                <Instagram size={21} strokeWidth={1.6} />
+      <div className="grid gap-4 sm:grid-cols-2 sm:gap-5">
+        {branches.map((branch, index) => {
+          return (
+            <motion.a
+              key={branch.name}
+              href={branch.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`Open Skydeck ${branch.name} on Instagram, ${branch.instagram}`}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-60px" }}
+              transition={{ duration: shouldReduceMotion ? 0.01 : 0.65, delay: shouldReduceMotion ? 0 : index * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={shouldReduceMotion ? undefined : { y: -5 }}
+              whileTap={shouldReduceMotion ? undefined : { scale: 0.99 }}
+              className={`group relative isolate flex min-h-[320px] overflow-hidden rounded-sm border bg-gradient-to-br p-5 transition-colors duration-500 sm:min-h-[370px] sm:p-7 ${branch.artwork} ${branch.border}`}
+            >
+              <span aria-hidden="true" className="pointer-events-none absolute right-0 top-0 select-none font-display text-[10rem] font-bold leading-none text-white/[0.035] transition-transform duration-700 group-hover:-translate-x-3 group-hover:translate-y-3 sm:text-[13rem]">
+                {branch.marker}
               </span>
-              <ArrowUpRight className="text-smoke transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-gold" size={20} />
-            </div>
-            <p className="mt-8 text-[10px] font-semibold uppercase tracking-widest2 text-smoke">See what&apos;s on</p>
-            <p className="mt-2 break-all font-display text-2xl font-bold text-bone sm:text-3xl">{restaurantInfo.instagram}</p>
-            <p className="mt-3 text-sm leading-relaxed text-smoke">Latest events, live moments and last-minute announcements.</p>
-          </motion.a>
+              <span aria-hidden="true" className="pointer-events-none absolute inset-4 border border-white/[0.08] sm:inset-5" />
 
-          <Link
-            href="#reservation"
-            className="event-cinema-cta group inline-flex min-h-14 items-center justify-between rounded-sm bg-gold px-5 py-4 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 hover:-translate-y-1 sm:px-6"
-          >
-            Book a table
-            <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-          </Link>
-        </div>
+              <div className="relative z-10 flex w-full flex-col justify-between">
+                <div className="flex items-start justify-between gap-4">
+                  <span className={`inline-flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest2 ${branch.accent}`}>
+                    <MapPin size={13} strokeWidth={1.7} />
+                    {branch.city}
+                  </span>
+                  <span className="font-display text-sm text-white/40">0{index + 1} / 02</span>
+                </div>
+
+                <div className="mt-16">
+                  <p className="text-[10px] font-semibold uppercase tracking-widest2 text-smoke">Skydeck · Resto Pub &amp; Kitchen</p>
+                  <h3 className="mt-2 font-display text-4xl font-bold leading-none text-bone sm:text-5xl">{branch.name}</h3>
+                  <div className="mt-6 flex items-center justify-between gap-4 border-t border-white/15 pt-4">
+                    <div className="min-w-0">
+                      <span className="block text-[9px] font-semibold uppercase tracking-widest2 text-smoke">Follow the branch</span>
+                      <span className="mt-1 block break-all font-display text-lg font-semibold text-bone sm:text-xl">{branch.instagram}</span>
+                    </div>
+                    <span className={`flex h-11 w-11 shrink-0 items-center justify-center border border-white/20 transition-colors duration-300 group-hover:border-current ${branch.accent}`}>
+                      <Instagram size={19} strokeWidth={1.6} />
+                    </span>
+                  </div>
+                  <div className={`mt-4 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-widest2 text-smoke transition-colors ${branch.hoverAccent}`}>
+                    See what&apos;s on
+                    <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+                  </div>
+                </div>
+              </div>
+            </motion.a>
+          );
+        })}
       </div>
-    </motion.div>
+
+      <div className="mt-6 flex justify-end">
+        <Link
+          href="#reservation"
+          className="event-cinema-cta group inline-flex min-h-12 items-center gap-8 rounded-sm bg-gold px-5 py-3 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 hover:-translate-y-1"
+        >
+          Book a table
+          <ArrowUpRight size={18} className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+        </Link>
+      </div>
+    </div>
   );
 }
 
