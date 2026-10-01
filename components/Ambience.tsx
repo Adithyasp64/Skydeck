@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const TILES = [
@@ -38,6 +39,33 @@ const TILES = [
 ];
 
 export default function Ambience() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || connection?.saveData) return;
+
+    const source = video.querySelector("source");
+    const sourceUrl = source?.dataset.src;
+    if (!source || !sourceUrl) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting) return;
+        source.src = sourceUrl;
+        video.load();
+        void video.play().catch(() => undefined);
+        observer.disconnect();
+      },
+      { rootMargin: "320px 0px" }
+    );
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="ambience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -69,16 +97,16 @@ export default function Ambience() {
             >
               {tile.videoSrc ? (
                 <video
-                  autoPlay
                   muted
                   loop
                   playsInline
-                  preload="metadata"
+                  preload="none"
                   poster={tile.src}
                   aria-hidden="true"
+                  ref={videoRef}
                   className="ambience-mobile-video absolute inset-0 h-full w-full object-cover sm:hidden"
                 >
-                  <source src={tile.videoSrc} type="video/mp4" />
+                  <source data-src={tile.videoSrc} type="video/mp4" />
                 </video>
               ) : null}
               <div className={tile.videoSrc ? "hidden sm:block h-full w-full" : "h-full w-full"}>

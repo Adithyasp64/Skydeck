@@ -44,9 +44,13 @@ export default function Location() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
-            Find your <span className="text-gold">way up.</span>
+          <h2 className="text-balance font-display text-4xl font-bold leading-tight text-bone sm:text-5xl">
+            Meet us above <span className="text-gold">RR Nagar.</span>
           </h2>
+          <p className="mt-4 max-w-md text-sm leading-relaxed text-smoke sm:text-base">
+            Good food, thoughtfully made drinks, and a rooftop setting for
+            evenings that deserve a little more time.
+          </p>
 
           <div className="mt-8">
             <p className="font-display text-2xl font-bold text-gold">{r.name}</p>
@@ -57,7 +61,6 @@ export default function Location() {
             <div className="flex items-start gap-3.5">
               <MapPin size={18} className="mt-0.5 shrink-0 text-gold" />
               <div>
-                <p className="text-sm text-bone"></p>
                 <p className="text-sm text-smoke">{r.location}</p>
               </div>
             </div>
@@ -70,7 +73,7 @@ export default function Location() {
               <div className="space-y-1">
                 {r.openingHours.map((h, i) => (
                   <p key={i} className="text-sm text-bone">
-                    <span className="text-smoke">Monday:</span> 6:am
+                    <span className="text-smoke">{h.days}</span> {h.hours}
                   </p>
                 ))}
               </div>

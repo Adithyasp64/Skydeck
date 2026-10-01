@@ -15,8 +15,5 @@ export const restaurantInfo: RestaurantInfo = {
   email: "skydec@gmail.com",
   instagram: "@skydeck__rrnagar",
   mapsUrl: "Add Google Maps link",
-  openingHours: [
-    { days: "Add days", hours: "Add hours" },
-    { days: "Add days", hours: "Add hours" },
-  ],
+  openingHours: [{ days: "All Days", hours: "11:00 am – 11:30 pm" }],
 };

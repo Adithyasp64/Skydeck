@@ -54,12 +54,29 @@ export default function Hero() {
   const y = useTransform(scrollYProgress, [0, 1], [0, 72]);
 
   useEffect(() => {
-    if (window.matchMedia("(max-width: 639px)").matches) return;
+    const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+    if (
+      window.matchMedia("(max-width: 639px)").matches ||
+      connection?.saveData ||
+      document.visibilityState !== "visible"
+    ) return;
 
-    HERO_SLIDES.slice(1).forEach(({ src }) => {
+    const preloadSlides = () => HERO_SLIDES.slice(1).forEach(({ src }) => {
       const image = new window.Image();
       image.src = src;
     });
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void, options?: { timeout: number }) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (idleWindow.requestIdleCallback) {
+      const idleId = idleWindow.requestIdleCallback(preloadSlides, { timeout: 4000 });
+      return () => idleWindow.cancelIdleCallback?.(idleId);
+    }
+
+    const timeoutId = window.setTimeout(preloadSlides, 1800);
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {

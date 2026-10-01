@@ -58,7 +58,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-line pt-6 text-xs text-smoke sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Skydeck, {restaurantInfo.location}. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Skydeck, {restaurantInfo.location}. All rights reserved. Built with ❤️ from Nikith and Adithya SP.</p>
           <p>RR Nagar - Bengaluru</p>
         </div>
       </div>

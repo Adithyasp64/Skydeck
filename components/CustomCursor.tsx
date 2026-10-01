@@ -10,7 +10,6 @@ import { useEffect, useRef, useState } from "react";
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
-  const [enabled, setEnabled] = useState(false);
   const [hoveringLink, setHoveringLink] = useState(false);
   const [hoveringMedia, setHoveringMedia] = useState<string | null>(null);
   const [visible, setVisible] = useState(false);
@@ -18,7 +17,6 @@ export default function CustomCursor() {
   useEffect(() => {
     const isFine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (!isFine) return;
-    setEnabled(true);
     document.documentElement.classList.add("has-custom-cursor");
 
     let ringX = 0, ringY = 0, targetX = 0, targetY = 0;
@@ -62,11 +60,9 @@ export default function CustomCursor() {
     };
   }, []);
 
-  if (!enabled) return null;
-
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300"
+      className="custom-cursor pointer-events-none fixed inset-0 z-[9999] transition-opacity duration-300"
       style={{ opacity: visible ? 1 : 0 }}
       aria-hidden="true"
     >

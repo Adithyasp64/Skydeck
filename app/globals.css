@@ -26,28 +26,6 @@ body {
   background-size: 72px 72px;
 }
 
-.font-athelas {
-  font-family: Athelas, Georgia, serif;
-}
-
-.font-vanguard {
-  font-family: Vanguard, "Arial Narrow", sans-serif;
-}
-
-.hero-accent {
-  font-family: Athelas, Georgia, serif;
-  font-style: italic;
-  font-weight: 500;
-  letter-spacing: 0;
-  text-shadow: 0 0 28px rgba(217, 179, 108, 0.24);
-}
-
-.hero-lead {
-  font-family: Athelas, Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-}
-
 @keyframes hero-ken-burns {
   from {
     transform: scale(1.02);
@@ -170,15 +148,19 @@ body {
 }
 
 /* Custom cursor — desktop (fine pointer) only */
+.custom-cursor {
+  display: none;
+}
+
 @media (hover: hover) and (pointer: fine) {
   html.has-custom-cursor,
   html.has-custom-cursor * {
     cursor: none !important;
   }
-}
 
-.hairline {
-  border-color: #29292D;
+  .custom-cursor {
+    display: block;
+  }
 }
 
 .section-glow {

@@ -12,6 +12,11 @@ npm run dev
 
 Open http://localhost:3000.
 
+Set `NEXT_PUBLIC_SITE_URL` to the exact public origin used by production (for
+example, `https://www.your-domain.com`). It supplies canonical, Open Graph,
+structured-data, sitemap, and robots URLs. Vercel's deployment host is used as
+a fallback when this variable is unset.
+
 To build for production:
 
 ```bash

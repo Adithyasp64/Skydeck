@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const POINTS = [
@@ -19,24 +19,41 @@ const EXPERIENCE_SLIDES = [
 ];
 
 export default function Experience() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [slideIndex, setSlideIndex] = useState(0);
+  const [isNearViewport, setIsNearViewport] = useState(false);
   const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
-    EXPERIENCE_SLIDES.slice(1).forEach((slide) => {
-      const image = new window.Image();
-      image.src = slide.src;
-    });
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsNearViewport(entry.isIntersecting),
+      { rootMargin: "200px 0px" }
+    );
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (
+      !isNearViewport ||
+      shouldReduceMotion ||
+      !window.matchMedia("(min-width: 1024px)").matches
+    ) return;
 
     const timer = window.setInterval(() => {
-      setSlideIndex((current) => (current + 1) % EXPERIENCE_SLIDES.length);
+      if (document.visibilityState === "visible") {
+        setSlideIndex((current) => (current + 1) % EXPERIENCE_SLIDES.length);
+      }
     }, 4800);
 
     return () => window.clearInterval(timer);
-  }, []);
+  }, [isNearViewport, shouldReduceMotion]);
 
   return (
-    <section id="experience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
+    <section ref={sectionRef} id="experience" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
       <div className="pointer-events-none absolute left-1/2 top-0 h-px w-1/2 bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-14 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
         <motion.div
