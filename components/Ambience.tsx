@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import AtmosphericFrame from "./AtmosphericFrame";
 
 const TILES = [
@@ -40,6 +41,7 @@ const TILES = [
 
 export default function Ambience() {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -96,18 +98,30 @@ export default function Ambience() {
               className={`group relative overflow-hidden rounded-sm ${tile.span}`}
             >
               {tile.videoSrc ? (
-                <video
-                  muted
-                  loop
-                  playsInline
-                  preload="none"
-                  poster={tile.src}
-                  aria-hidden="true"
-                  ref={videoRef}
-                  className="ambience-mobile-video absolute inset-0 h-full w-full object-cover sm:hidden"
-                >
-                  <source data-src={tile.videoSrc} type="video/mp4" />
-                </video>
+                <>
+                  <Image
+                    src={tile.src}
+                    alt=""
+                    fill
+                    sizes="(max-width: 639px) 100vw, 0px"
+                    className="object-cover sm:hidden"
+                  />
+                  <video
+                    muted
+                    loop
+                    playsInline
+                    preload="none"
+                    poster={tile.src}
+                    aria-hidden="true"
+                    ref={videoRef}
+                    onCanPlay={() => setVideoReady(true)}
+                    onError={() => setVideoReady(false)}
+                    style={{ opacity: videoReady ? 0.96 : 0 }}
+                    className="ambience-mobile-video absolute inset-0 h-full w-full object-cover transition-opacity duration-500 sm:hidden"
+                  >
+                    <source data-src={tile.videoSrc} type="video/mp4" />
+                  </video>
+                </>
               ) : null}
               <div className={tile.videoSrc ? "hidden sm:block h-full w-full" : "h-full w-full"}>
                 <AtmosphericFrame

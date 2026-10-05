@@ -14,6 +14,7 @@ export const restaurantInfo: RestaurantInfo = {
   phone: "9845556080",
   email: "skydec@gmail.com",
   instagram: "@skydeck__rrnagar",
-  mapsUrl: "Add Google Maps link",
+  instagramUrl: "https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw%3D%3D",
+  mapsUrl: "https://www.google.com/maps/place/skydeck+rr+nagar/data=!4m2!3m1!1s0x3bae3f61cf1b851b:0x1a90962c08949642?sa=X&ved=1t:242&ictx=111",
   openingHours: [{ days: "All Days", hours: "11:00 am – 11:30 pm" }],
 };

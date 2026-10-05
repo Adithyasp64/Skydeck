@@ -65,7 +65,7 @@ export default function Navbar() {
             alt="Skydeck logo"
             width={36}
             height={36}
-            className="rounded-full"
+            className="aspect-square rounded-full"
           />
           <span className="font-display text-lg font-bold tracking-wide text-bone">
             SKYDECK

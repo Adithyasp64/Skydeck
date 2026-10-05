@@ -14,7 +14,7 @@ import InstagramFloat from "@/components/InstagramFloat";
 
 export default function Home() {
   return (
-    <main>
+    <main id="main-content">
       <Navbar />
       <Hero />
       <Experience />

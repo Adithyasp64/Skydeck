@@ -59,17 +59,17 @@ export default function Location() {
 
           <div className="mt-9 space-y-6">
             <div className="flex items-start gap-3.5">
-              <MapPin size={18} className="mt-0.5 shrink-0 text-gold" />
+              <MapPin aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-gold" />
               <div>
                 <p className="text-sm text-smoke">{r.location}</p>
               </div>
             </div>
             <div className="flex items-start gap-3.5">
-              <Phone size={18} className="mt-0.5 shrink-0 text-gold" />
+              <Phone aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-gold" />
               <p className="text-sm text-bone">{r.phone}</p>
             </div>
             <div className="flex items-start gap-3.5">
-              <Clock size={18} className="mt-0.5 shrink-0 text-gold" />
+              <Clock aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-gold" />
               <div className="space-y-1">
                 {r.openingHours.map((h, i) => (
                   <p key={i} className="text-sm text-bone">
@@ -79,8 +79,8 @@ export default function Location() {
               </div>
             </div>
             <div className="flex items-start gap-3.5">
-              <Instagram size={18} className="mt-0.5 shrink-0 text-gold" />
-              <a href="https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw%3D%3D" target="_blank" rel="noopener noreferrer">
+              <Instagram aria-hidden="true" size={18} className="mt-0.5 shrink-0 text-gold" />
+              <a href={r.instagramUrl} target="_blank" rel="noopener noreferrer">
                 <p className="text-sm text-bone">{r.instagram}</p>
               </a>
             </div>
@@ -88,7 +88,7 @@ export default function Location() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href={"https://www.google.com/maps/place/skydeck+rr+nagar/data=!4m2!3m1!1s0x3bae3f61cf1b851b:0x1a90962c08949642?sa=X&ved=1t:242&ictx=111"}
+              href={r.mapsUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="rounded-sm bg-gold px-6 py-3.5 text-xs font-semibold uppercase tracking-widest2 text-void transition-transform duration-300 hover:-translate-y-0.5"

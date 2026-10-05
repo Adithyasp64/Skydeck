@@ -3,8 +3,7 @@
 import { Instagram } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
-
-const INSTAGRAM_URL = "https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw==";
+import { restaurantInfo } from "@/data/restaurant";
 
 export default function InstagramFloat() {
   const [isVisible, setIsVisible] = useState(false);
@@ -25,7 +24,7 @@ export default function InstagramFloat() {
 
   return (
     <motion.a
-      href={INSTAGRAM_URL}
+      href={restaurantInfo.instagramUrl}
       target="_blank"
       rel="noreferrer"
       initial={false}

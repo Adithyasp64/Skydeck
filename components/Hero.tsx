@@ -44,6 +44,8 @@ export default function Hero() {
   const ref = useRef<HTMLDivElement>(null);
   const [slideIndex, setSlideIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [mobileVideoReady, setMobileVideoReady] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -52,6 +54,14 @@ export default function Hero() {
 
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
   const y = useTransform(scrollYProgress, [0, 1], [0, 72]);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 639px)");
+    const update = () => setIsMobile(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
 
   useEffect(() => {
     const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
@@ -97,6 +107,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
+      aria-labelledby="hero-title"
       ref={ref}
       className="relative flex h-[100svh] w-full items-end overflow-hidden bg-void"
     >
@@ -105,17 +116,30 @@ export default function Hero() {
         className="absolute inset-[-5%] sm:hidden"
         aria-hidden="true"
       >
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/images/ambience/hero-main.jpg"
-          className="hero-mobile-video h-full w-full object-cover"
-        >
-          <source src="/videos/bg_clip.mp4" type="video/mp4" />
-        </video>
+        <Image
+          src="/images/ambience/hero-main.jpg"
+          alt=""
+          fill
+          priority
+          sizes="110vw"
+          className="object-cover"
+        />
+        {isMobile && (
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            poster="/images/ambience/hero-main.jpg"
+            onCanPlay={() => setMobileVideoReady(true)}
+            onError={() => setMobileVideoReady(false)}
+            style={{ opacity: mobileVideoReady ? 0.96 : 0 }}
+            className="hero-mobile-video h-full w-full object-cover transition-opacity duration-500"
+          >
+            <source src="/videos/bg_clip.mp4" type="video/mp4" />
+          </video>
+        )}
       </motion.div>
 
       <motion.div
@@ -177,6 +201,7 @@ export default function Hero() {
               </motion.p>
 
               <motion.h1
+                id="hero-title"
                 initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}

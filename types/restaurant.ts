@@ -11,6 +11,7 @@ export interface RestaurantInfo {
   phone: string;
   email: string;
   instagram: string;
+  instagramUrl: string;
   mapsUrl: string;
   openingHours: OpeningHours[];
 }

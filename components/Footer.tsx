@@ -26,7 +26,7 @@ export default function Footer() {
               alt="Skydeck logo"
               width={44}
               height={44}
-              className="rounded-full"
+              className="aspect-square rounded-full"
             />
             <div>
               <p className="font-display text-lg font-bold text-bone">SKYDECK</p>
@@ -36,7 +36,7 @@ export default function Footer() {
             </div>
           </div>
 
-          <nav className="flex flex-wrap gap-x-8 gap-y-3">
+          <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-8 gap-y-3">
             {LINKS.map((l) => (
               <button
                 key={l.href}
@@ -49,7 +49,9 @@ export default function Footer() {
           </nav>
 
           <a
-            href="https://www.instagram.com/skydeck__rrnagar?stkn=ZDNlZDc0MzIxNw=="
+            href={restaurantInfo.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 text-sm text-smoke transition-colors hover:text-gold"
           >
             <Instagram size={16} />

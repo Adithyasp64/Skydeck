@@ -20,11 +20,23 @@ const body = Manrope({
   display: "swap",
 });
 
+const siteDescription =
+  "Skydeck is a restaurant and lounge in RR Nagar, Bengaluru for dinner, drinks, live music and events. Reserve a table for your next night out.";
+
 export const metadata: Metadata = {
   metadataBase: siteUrl,
   title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
-  description:
-    "Skydeck is a restaurant and lounge in RR Nagar, Bengaluru — dinner, drinks, live music and events under warm gold light and neon. Reserve a table for your next night out.",
+  description: siteDescription,
+  applicationName: "Skydeck",
+  authors: [{ name: "Skydeck" }],
+  creator: "Skydeck",
+  publisher: "Skydeck",
+  category: "restaurant",
+  icons: {
+    icon: "/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   keywords: [
     "Skydeck RR Nagar",
     "restaurant in RR Nagar",
@@ -45,38 +57,68 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
-    description:
-      "Dinner, drinks, live music and events in RR Nagar, Bengaluru. Great food. Good music. Better nights.",
+    description: siteDescription,
     url: "/",
     siteName: "Skydeck",
-    images: ["/images/ambience/hero-main.jpg"],
+    images: [
+      {
+        url: "/images/ambience/hero-main.jpg",
+        alt: "Skydeck restaurant and lounge in RR Nagar, Bengaluru",
+      },
+    ],
     locale: "en_IN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
-    description:
-      "Dinner, drinks, live music and events in RR Nagar, Bengaluru.",
-    images: ["/images/ambience/hero-main.jpg"],
+    description: siteDescription,
+    images: [
+      {
+        url: "/images/ambience/hero-main.jpg",
+        alt: "Skydeck restaurant and lounge in RR Nagar, Bengaluru",
+      },
+    ],
   },
 };
 
 const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
+  "@id": `${siteUrl.toString()}#restaurant`,
   name: restaurantInfo.name,
-  description: metadata.description,
+  description: siteDescription,
   url: siteUrl.toString(),
   image: new URL("/images/ambience/hero-main.jpg", siteUrl).toString(),
+  telephone: `+91${restaurantInfo.phone}`,
+  email: restaurantInfo.email,
+  hasMap: restaurantInfo.mapsUrl,
   address: {
     "@type": "PostalAddress",
-    addressLocality: "Bengaluru",
+    addressLocality: "RR Nagar",
     addressRegion: "Karnataka",
     addressCountry: "IN",
   },
-  areaServed: "RR Nagar, Bengaluru",
-  sameAs: ["https://www.instagram.com/skydeck__rrnagar/"],
+  areaServed: {
+    "@type": "City",
+    name: "Bengaluru",
+  },
+  openingHoursSpecification: restaurantInfo.openingHours.map((hours) => ({
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday",
+    ],
+    opens: "11:00",
+    closes: "23:30",
+    description: `${hours.days}: ${hours.hours}`,
+  })),
+  sameAs: [restaurantInfo.instagramUrl],
   acceptsReservations: true,
 };
 
