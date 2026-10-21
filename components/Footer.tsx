@@ -21,19 +21,18 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-3">
-            <Image
-              src="/images/logo.jpg"
-              alt="Skydeck logo"
-              width={44}
-              height={44}
-              className="aspect-square rounded-full"
-            />
-            <div>
-              <p className="font-display text-lg font-bold text-bone">SKYDECK</p>
-              <p className="text-xs uppercase tracking-widest2 text-smoke">
-                {restaurantInfo.tagline}
-              </p>
-            </div>
+            <span className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black p-2">
+              <Image
+                src="/images/logo.png"
+                alt="Skydeck Resto Pub & Kitchen logo"
+                width={80}
+                height={80}
+                className="h-full w-full object-contain"
+              />
+            </span>
+            <p className="font-display text-lg font-bold tracking-wide text-bone">
+              SKYDECK RR Nagar
+            </p>
           </div>
 
           <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-8 gap-y-3">

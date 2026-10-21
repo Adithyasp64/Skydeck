@@ -60,15 +60,17 @@ export default function Navbar() {
           className="flex items-center gap-2.5"
           aria-label="Skydeck — home"
         >
-          <Image
-            src="/images/logo.jpg"
-            alt="Skydeck logo"
-            width={36}
-            height={36}
-            className="aspect-square rounded-full"
-          />
-          <span className="font-display text-lg font-bold tracking-wide text-bone">
-            SKYDECK
+          <span className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black p-1.5">
+            <Image
+              src="/images/logo.png"
+              alt="Skydeck Resto Pub & Kitchen logo"
+              width={64}
+              height={64}
+              className="h-full w-full object-contain"
+            />
+          </span>
+          <span className="font-display text-base font-bold tracking-wide text-bone">
+            SKYDECK RR Nagar
           </span>
         </button>
 

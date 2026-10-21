@@ -25,7 +25,7 @@ const siteDescription =
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
+  title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
   description: siteDescription,
   applicationName: "Skydeck",
   authors: [{ name: "Skydeck" }],
@@ -33,9 +33,9 @@ export const metadata: Metadata = {
   publisher: "Skydeck",
   category: "restaurant",
   icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
   },
   keywords: [
     "Skydeck RR Nagar",
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
+    title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
     description: siteDescription,
     url: "/",
     siteName: "Skydeck",
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Skydeck | Restaurant & Lounge in RR Nagar, Bengaluru",
+    title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
     description: siteDescription,
     images: [
       {
