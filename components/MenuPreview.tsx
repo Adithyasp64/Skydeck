@@ -8,7 +8,7 @@ const TONES = ["ember", "gold", "violet", "blue"] as const;
 
 export default function MenuPreview() {
   return (
-    <section className="relative bg-void py-16 sm:py-24 lg:py-32">
+    <section id="menu" className="relative bg-void py-16 sm:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

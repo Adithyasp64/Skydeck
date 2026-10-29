@@ -1,7 +1,19 @@
+const PRODUCTION_SITE_URL = "https://skydeckrrnagar.com";
 const configuredSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
-const vercelHost = process.env.VERCEL_URL?.trim();
 
-export const siteUrl = new URL(
-  configuredSiteUrl ||
-    (vercelHost ? `https://${vercelHost}` : "http://localhost:3000")
-);
+function getSiteUrl(value: string | undefined): URL {
+  if (!value) return new URL(PRODUCTION_SITE_URL);
+
+  try {
+    const url = new URL(value);
+    if (url.protocol !== "http:" && url.protocol !== "https:") {
+      return new URL(PRODUCTION_SITE_URL);
+    }
+
+    return new URL(url.origin);
+  } catch {
+    return new URL(PRODUCTION_SITE_URL);
+  }
+}
+
+export const siteUrl = getSiteUrl(configuredSiteUrl);

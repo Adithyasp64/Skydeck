@@ -14,7 +14,7 @@ const TONES = ["gold", "ember", "violet", "blue"] as const;
 
 export default function Gallery() {
   return (
-    <section className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
+    <section id="gallery" className="section-glow relative overflow-hidden bg-void py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <motion.div
           initial={{ opacity: 0, y: 16 }}

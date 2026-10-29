@@ -3,7 +3,6 @@ import type { ReactNode } from "react";
 import { Bricolage_Grotesque, Manrope } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "@/components/CustomCursor";
-import { restaurantInfo } from "@/data/restaurant";
 import { siteUrl } from "@/lib/site";
 
 const display = Bricolage_Grotesque({
@@ -20,12 +19,13 @@ const body = Manrope({
   display: "swap",
 });
 
+const siteTitle = "Skydeck RR Nagar | Pub, Restaurant & Live Events in Bengaluru";
 const siteDescription =
-  "Skydeck is a restaurant and lounge in RR Nagar, Bengaluru for dinner, drinks, live music and events. Reserve a table for your next night out.";
+  "Discover Skydeck RR Nagar, Bengaluru, for great food, drinks, vibrant ambience and upcoming events. Explore event posters and contact Skydeck for bookings.";
 
 export const metadata: Metadata = {
   metadataBase: siteUrl,
-  title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
+  title: siteTitle,
   description: siteDescription,
   applicationName: "Skydeck",
   authors: [{ name: "Skydeck" }],
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     "pub in RR Nagar Bengaluru",
     "restaurant and lounge Bengaluru",
   ],
-  alternates: { canonical: "/" },
+  alternates: { canonical: siteUrl.toString() },
   robots: {
     index: true,
     follow: true,
@@ -56,9 +56,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
+    title: siteTitle,
     description: siteDescription,
-    url: "/",
+    url: siteUrl.toString(),
     siteName: "Skydeck",
     images: [
       {
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Skydeck RR Nagar | Restaurant & Lounge in Bengaluru",
+    title: siteTitle,
     description: siteDescription,
     images: [
       {
@@ -86,39 +86,14 @@ const restaurantSchema = {
   "@context": "https://schema.org",
   "@type": "Restaurant",
   "@id": `${siteUrl.toString()}#restaurant`,
-  name: restaurantInfo.name,
+  name: "Skydeck RR Nagar",
   description: siteDescription,
   url: siteUrl.toString(),
   image: new URL("/images/ambience/hero-main.jpg", siteUrl).toString(),
-  telephone: `+91${restaurantInfo.phone}`,
-  email: restaurantInfo.email,
-  hasMap: restaurantInfo.mapsUrl,
-  address: {
-    "@type": "PostalAddress",
-    addressLocality: "RR Nagar",
-    addressRegion: "Karnataka",
-    addressCountry: "IN",
-  },
   areaServed: {
     "@type": "City",
     name: "Bengaluru",
   },
-  openingHoursSpecification: restaurantInfo.openingHours.map((hours) => ({
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: [
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-      "Sunday",
-    ],
-    opens: "11:00",
-    closes: "23:30",
-    description: `${hours.days}: ${hours.hours}`,
-  })),
-  sameAs: [restaurantInfo.instagramUrl],
   acceptsReservations: true,
 };
 

@@ -207,6 +207,9 @@ export default function Hero() {
                 transition={{ duration: shouldReduceMotion ? 0.01 : 0.8, delay: 0.16, ease: [0.16, 1, 0.3, 1] }}
                 className="max-w-3xl font-display text-4xl font-bold leading-[1.05] text-bone sm:text-6xl lg:text-7xl"
               >
+                <span className="mb-3 block text-base font-semibold uppercase tracking-widest2 text-gold sm:text-lg">
+                  Skydeck RR Nagar, Bengaluru
+                </span>
                 {HERO_SLIDES[slideIndex].headline.replace(HERO_SLIDES[slideIndex].accent, "")}
                 <span className="text-gold">{HERO_SLIDES[slideIndex].accent}</span>
               </motion.h1>

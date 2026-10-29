@@ -43,11 +43,6 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  const handleNav = (href: string) => {
-    setOpen(false);
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
@@ -55,8 +50,8 @@ export default function Navbar() {
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
-        <button
-          onClick={() => handleNav("#hero")}
+        <a
+          href="#hero"
           className="flex items-center gap-2.5"
           aria-label="Skydeck — home"
         >
@@ -72,13 +67,13 @@ export default function Navbar() {
           <span className="font-display text-base font-bold tracking-wide text-bone">
             SKYDECK RR Nagar
           </span>
-        </button>
+        </a>
 
         <nav className="hidden items-center gap-9 md:flex">
           {LINKS.map((l) => (
-            <button
+            <a
               key={l.href}
-              onClick={() => handleNav(l.href)}
+              href={l.href}
               className={`relative text-sm font-medium uppercase tracking-widest2 transition-colors duration-300 ${
                 active === l.href ? "text-gold" : "text-smoke hover:text-bone"
               }`}
@@ -90,16 +85,16 @@ export default function Navbar() {
                   className="absolute -bottom-1.5 left-0 h-px w-full bg-gold"
                 />
               )}
-            </button>
+            </a>
           ))}
         </nav>
 
-        <button
-          onClick={() => handleNav("#reservation")}
+        <a
+          href="#reservation"
           className="hidden rounded-sm border border-gold/60 px-5 py-2.5 text-xs font-semibold uppercase tracking-widest2 text-gold transition-all duration-300 hover:bg-gold hover:text-void md:inline-block"
         >
           Book a Table
-        </button>
+        </a>
 
         <button
           className="text-bone md:hidden"
@@ -121,20 +116,22 @@ export default function Navbar() {
         >
           <div className="flex flex-col gap-1 px-6 py-4">
             {LINKS.map((l) => (
-              <button
+              <a
                 key={l.href}
-                onClick={() => handleNav(l.href)}
+                href={l.href}
+                onClick={() => setOpen(false)}
                 className="py-3 text-left text-base font-medium uppercase tracking-wide text-bone"
               >
                 {l.label}
-              </button>
+              </a>
             ))}
-            <button
-              onClick={() => handleNav("#reservation")}
+            <a
+              href="#reservation"
+              onClick={() => setOpen(false)}
               className="mt-2 rounded-sm bg-gold py-3 text-center text-sm font-semibold uppercase tracking-widest2 text-void"
             >
               Book a Table
-            </button>
+            </a>
           </div>
         </motion.div>
       )}

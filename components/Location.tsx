@@ -28,7 +28,7 @@ export default function Location() {
       >
         <AtmosphericFrame
           src="/images/ambience/bar-glow.jpg"
-          alt="Skydeck dining hall from the entrance"
+          alt="Skydeck bar interior with warm lighting"
           tone="blue"
           className="h-full w-full"
           sizes="58vw"
@@ -113,7 +113,7 @@ export default function Location() {
         >
           <AtmosphericFrame
             src="/images/ambience/bar-glow.jpg"
-            alt="Skydeck dining hall from the entrance"
+            alt="Skydeck bar interior with warm lighting"
             tone="blue"
             className="h-full w-full"
             sizes="(min-width: 1024px) 50vw, 100vw"

@@ -13,9 +13,6 @@ const LINKS = [
 ];
 
 export default function Footer() {
-  const scrollTo = (href: string) =>
-    document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-
   return (
     <footer className="relative border-t border-line bg-void">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
@@ -37,13 +34,13 @@ export default function Footer() {
 
           <nav aria-label="Footer navigation" className="flex flex-wrap gap-x-8 gap-y-3">
             {LINKS.map((l) => (
-              <button
+              <a
                 key={l.href}
-                onClick={() => scrollTo(l.href)}
+                href={l.href}
                 className="text-sm text-smoke transition-colors hover:text-gold"
               >
                 {l.label}
-              </button>
+              </a>
             ))}
           </nav>
 
