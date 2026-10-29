@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "framer-motion";
+import LoadingImage from "./LoadingImage";
 
 interface AtmosphericFrameProps {
   src?: string;
@@ -45,7 +45,7 @@ export default function AtmosphericFrame({
         className={`relative overflow-hidden ${className}`}
         data-cursor-label={cursorLabel}
       >
-        <Image
+        <LoadingImage
           src={src}
           alt={alt}
           fill

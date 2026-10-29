@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import LoadingImage from "./LoadingImage";
 import { ChevronDown } from "lucide-react";
 
 const HERO_SLIDES = [
@@ -116,7 +116,7 @@ export default function Hero() {
         className="absolute inset-[-5%] sm:hidden"
         aria-hidden="true"
       >
-        <Image
+        <LoadingImage
           src="/images/ambience/hero-main.jpg"
           alt=""
           fill
@@ -162,7 +162,7 @@ export default function Hero() {
             }}
             className="absolute inset-0"
           >
-            <Image
+            <LoadingImage
               src={HERO_SLIDES[slideIndex].src}
               alt={HERO_SLIDES[slideIndex].alt}
               fill

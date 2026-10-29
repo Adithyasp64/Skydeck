@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { Instagram } from "lucide-react";
 import { restaurantInfo } from "@/data/restaurant";
+import LoadingImage from "./LoadingImage";
 
 const LINKS = [
   { label: "Home", href: "#hero" },
@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="flex flex-col gap-10 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-3">
             <span className="flex h-20 w-20 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black p-2">
-              <Image
+              <LoadingImage
                 src="/images/logo.png"
                 alt="Skydeck Resto Pub & Kitchen logo"
                 width={80}

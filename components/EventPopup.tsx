@@ -1,9 +1,9 @@
 "use client";
 
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import Image from "next/image";
 import { X } from "lucide-react";
 import { useEffect, useState } from "react";
+import LoadingImage from "./LoadingImage";
 
 const SESSION_KEY = "skydeck-event-popup-shown";
 const SHOW_AFTER_SCROLL = 320;
@@ -59,7 +59,7 @@ export default function EventPopup() {
           className="fixed inset-x-3 bottom-[calc(0.75rem+env(safe-area-inset-bottom))] z-40 mx-auto hidden w-[calc(100vw-1.5rem)] max-w-[360px] overflow-hidden rounded-sm border border-bone/15 bg-char2 shadow-[0_18px_50px_rgba(0,0,0,0.5)] sm:inset-x-auto sm:right-6 sm:bottom-6 sm:mx-0 sm:block sm:w-[320px] sm:max-w-none"
         >
           <div className="absolute inset-0">
-            <Image
+            <LoadingImage
               src={TONIGHT_EVENT.image}
               alt=""
               fill

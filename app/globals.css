@@ -127,6 +127,38 @@ body {
   text-wrap: balance;
 }
 
+.image-loading-indicator {
+  background: linear-gradient(135deg, rgba(5, 5, 5, 0.42), rgba(217, 179, 108, 0.08));
+  backdrop-filter: blur(2px);
+}
+
+.image-loading-track {
+  position: relative;
+  display: block;
+  width: min(42%, 9rem);
+  height: 2px;
+  overflow: hidden;
+  background: rgba(244, 242, 237, 0.2);
+}
+
+.image-loading-bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 42%;
+  background: #d9b36c;
+  box-shadow: 0 0 12px rgba(217, 179, 108, 0.8);
+  animation: image-loading-progress 1.15s ease-in-out infinite;
+}
+
+@keyframes image-loading-progress {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(360%);
+  }
+}
+
 /* subtle film-grain overlay used behind hero/section media */
 .grain::after {
   content: "";

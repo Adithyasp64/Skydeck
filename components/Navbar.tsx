@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
+import LoadingImage from "./LoadingImage";
 
 const LINKS = [
   { label: "Home", href: "#hero" },
@@ -61,7 +61,7 @@ export default function Navbar() {
           aria-label="Skydeck — home"
         >
           <span className="flex h-16 w-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-black p-1.5">
-            <Image
+            <LoadingImage
               src="/images/logo.png"
               alt="Skydeck Resto Pub & Kitchen logo"
               width={64}

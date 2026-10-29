@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import AtmosphericFrame from "./AtmosphericFrame";
+import LoadingImage from "./LoadingImage";
 
 const TILES = [
   {
@@ -99,7 +99,7 @@ export default function Ambience() {
             >
               {tile.videoSrc ? (
                 <>
-                  <Image
+                  <LoadingImage
                     src={tile.src}
                     alt=""
                     fill
