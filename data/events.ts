@@ -9,68 +9,68 @@ import { SkydeckEvent } from "@/types/event";
  * artists, dates, or ticket information.
  */
 export const events: SkydeckEvent[] = [
-  {
-    id: "raghu-dixit-project",
-    title: "Live at Skydeck",
-    artist: "Raghu Dixit Project",
-    date: "2026-03-14",
+    {
+    id: "raghu-dixit-project 5",
+    title: "SWARAG - The Band",
+    artist: "Swarag - The Band",
+    date: "2026-10-25",
     time: "8:00 PM",
-    description: "An evening of live music with the Raghu Dixit Concert.",
-    image: "/images/events/raghu-dixit-crowd.jpg",
-
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/1.webp",
+    
   },
     {
-    id: "raghu-dixit-project 2",
+    id: "raghu-dixit-project 6",
     title: "Live at Skydeck",
-    artist: "The D Major Band",
-    date: "2026-03-14",
+    artist: "The Suraj Pawar Band",
+    date: "2026-10-24",
     time: "8:00 PM",
-    description: "d major",
-    image: "/images/events/d major.jpg",
+    description: "An evening of live music with the Raghu Dixit Project.",
+    image: "/images/events/2.jpeg",
     
   },
  
     {
     id: "raghu-dixit-project 3",
     title: "Live at Skydeck",
-    artist: "The H20 Band",
-    date: "2026-03-14",
+    artist: "Barath CJ",
+    date: "2026-10-18",
     time: "8:00 PM",
     description: "An evening of live music with the Raghu Dixit Project.",
-    image: "/images/events/h20 band.jpg",
+    image: "/images/events/3.webp",
     
   },
  
     {
     id: "raghu-dixit-project 4",
     title: "Live at Skydeck",
-    artist: "The Hat Dropper",
-    date: "2026-03-14",
+    artist: "Swaraga",
+    date: "2026-10-17",
     time: "8:00 PM",
     description: "An evening of live music with the Raghu Dixit Project.",
-    image: "/images/events/hat dropper.jpg",
+    image: "/images/events/4.webp",
     
   },
  
     {
     id: "raghu-dixit-project 5",
-    title: "Live at Skydeck",
-    artist: "Swarag - The Band",
-    date: "2026-03-14",
+    title: "Live At Skydeck",
+    artist: "Concept_H band",
+    date: "2026-10-16",
     time: "8:00 PM",
     description: "An evening of live music with the Raghu Dixit Project.",
-    image: "/images/events/swarg.jpg",
+    image: "/images/events/5.webp",
     
   },
  
     {
     id: "raghu-dixit-project 6",
     title: "Live at Skydeck",
-    artist: "Hemanth Rakhi event",
-    date: "2026-03-14",
+    artist: "Sankskara - The Band",
+    date: "2026-10-09",
     time: "8:00 PM",
     description: "An evening of live music with the Raghu Dixit Project.",
-    image: "/images/events/hemanth rakhi.jpg",
+    image: "/images/events/8.jpeg",
     
   },
  

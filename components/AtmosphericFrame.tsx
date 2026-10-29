@@ -9,6 +9,7 @@ interface AtmosphericFrameProps {
   cursorLabel?: string;
   className?: string;
   sizes?: string;
+  imageFit?: "cover" | "contain";
   /** Tint used only for the no-photo placeholder gradient. */
   tone?: "gold" | "violet" | "blue" | "ember";
 }
@@ -33,8 +34,11 @@ export default function AtmosphericFrame({
   cursorLabel,
   className = "",
   sizes = "(min-width: 1024px) 50vw, 100vw",
+  imageFit = "cover",
   tone = "gold",
 }: AtmosphericFrameProps) {
+  const imageFitClass = imageFit === "contain" ? "object-contain" : "object-cover";
+
   if (src) {
     return (
       <div
@@ -46,7 +50,7 @@ export default function AtmosphericFrame({
           alt={alt}
           fill
           sizes={sizes}
-          className="object-cover transition-transform duration-[1400ms] ease-cinematic group-hover:scale-[1.06]"
+          className={`${imageFitClass} transition-transform duration-[1400ms] ease-cinematic group-hover:scale-[1.06]`}
         />
       </div>
     );
